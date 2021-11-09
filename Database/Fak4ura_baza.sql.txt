@@ -1,0 +1,81 @@
+-- Projekt bazy Fak4ura
+-- SPK / Fak4ura TEAM
+
+ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD';
+
+DROP TABLE Faktury_pozycje;
+DROP TABLE Faktury;
+DROP TABLE Uzytkownicy;
+DROP TABLE Kontrahenci;
+
+
+
+CREATE TABLE Uzytkownicy (
+    --id        NUMBER GENERATED ALWAYS AS IDENTITY,
+    imie      VARCHAR2(30) NOT NULL,
+    nazwisko  VARCHAR2(50) NOT NULL,
+    nazwisko_rodowe VARCHAR(50) NOT NULL,
+    login     VARCHAR2(20) NOT NULL,
+    haslo     VARCHAR2(100),
+    ulica     VARCHAR(50),
+    kod_pocztowy VARCHAR(8),
+    kraj      VARCHAR(50) NOT NULL,
+    nr_dokumentu VARCHAR(20),
+    typ_dokumentu VARCHAR(7) CONSTRAINT u_td_chk CHECK (typ_dokumentu IN ('DOWOD', 'PASZPORT')),
+    email     VARCHAR(60),
+    --aktywny   char(1)
+    
+);
+ALTER TABLE Uzytkownicy ADD CONSTRAINT u_pk PRIMARY KEY ( login );
+
+
+CREATE TABLE Kontrahenci (
+    id        NUMBER GENERATED ALWAYS AS IDENTITY,
+    nazwa     VARCHAR2(50) UNIQUE NOT NULL,
+    imie      VARCHAR2(30) NOT NULL,
+    nazwisko  VARCHAR2(50) NOT NULL,
+    ulica     VARCHAR(50),
+    kod_pocztowy VARCHAR(8),
+    kraj      VARCHAR(50) NOT NULL,
+    NIP       VARCHAR(10),
+    email     VARCHAR(60),
+    www       VARCHAR2(50)
+);
+ALTER TABLE Kontrahenci ADD (
+    CONSTRAINT k_pk PRIMARY KEY ( id )
+);
+
+
+CREATE TABLE Faktury (
+    id        NUMBER GENERATED ALWAYS AS IDENTITY,
+    numer     VARCHAR(20) UNIQUE NOT NULL,
+    data      DATE DEFAULT SYSDATE,
+    waluta    VARCHAR(3),
+    ilosc_pozycji NUMBER NOT NULL,
+    wartosc   NUMBER NOT NULL,
+    podatek   NUMBER,
+    uzytkownik_login VARCHAR2(20) NOT NULL,
+    kontrahent_id NUMBER NOT NULL
+);
+ALTER TABLE Faktury ADD (
+    CONSTRAINT f_pk PRIMARY KEY ( id ),
+    CONSTRAINT f_fk_u FOREIGN KEY (uzytkownik_login) REFERENCES Uzytkownicy( login ),
+    CONSTRAINT f_fk_k FOREIGN KEY (kontrahent_id) REFERENCES Kontrahenci( id )
+);
+
+
+CREATE TABLE Faktury_pozycje (
+    id        NUMBER GENERATED ALWAYS AS IDENTITY,
+    nazwa_pozycji VARCHAR2(50) NOT NULL,
+    ilosc     NUMBER NOT NULL,
+    cena      NUMBER,
+    podatek   VARCHAR2(20),
+    faktura_id NUMBER NOT NULL
+);
+ALTER TABLE Faktury_pozycje ADD (
+    CONSTRAINT fp_pk PRIMARY KEY ( id ),
+    CONSTRAINT fp_fk_f FOREIGN KEY (faktura_id) REFERENCES Faktury( id )
+);
+
+
+

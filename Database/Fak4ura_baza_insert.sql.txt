@@ -1,0 +1,7 @@
+-- Projekt bazy Fak4ura
+-- SPK / Fak4ura TEAM
+
+
+-- Master user
+INSERT INTO Uzytkownicy VALUES ('Jan','Zysk','Zysk','jkowalski','czystyzysk1','Zyskowna 12','00-200','Polska','AAA100001','DOWOD','jan.zysk@gmail.com');
+
