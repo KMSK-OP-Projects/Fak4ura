@@ -1,5 +1,203 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿
+
+
+
+
+#userAccountLogoInput {
+    margin: 12px 0;
+    height: 200px;
+    width: 450px;
+    position: absolute;
+    /*
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     */
+}
+
+#userAccountLogoInput img {
+    display: block;
+    height: 100%;
+}
+
+#serviceProduktTablecustomers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#serviceProduktTable td, #serviceProduktTable th {
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+
+#serviceProduktTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#serviceProduktTable tr:hover {
+    background-color: #ddd;
+}
+
+#serviceProduktTable th {
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #008080;
+    color: white;
+}
+
+.serviceProduktInput {
+    background-color: transparent;
+    border: 0;
+}
+
+
+@media print {
+    #addRowButton {
+        display: none;
+    }
+
+    .footer {
+        display: none;
+    }
+}
+
+
+.shadow {
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+#welcomeSign {
+    font-size: 21px;
+    margin-top: 5px;
+   
+    position:absolute;
+    right:130px;
+}
+
+
+#btnLogin {
+    background: #02abc2;
+    border: thin;
+}
+
+.main-content {
+    width: 55%;
+    border-radius: 20px;
+    margin: 10% auto 6% auto;
+    display: flex;
+    max-width: 850px;
+}
+
+
+
+.logoArea {
+    background-color: #008080;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media screen and (max-width: 640px) {
+    .main-content {
+        width: 90%;
+    }
+
+    .logoArea {
+        display: none;
+    }
+    #welcomeSign{}
+
+    .login_form {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+}
+
+@media screen and (min-width: 641px) and (max-width: 990px) {
+    .main-content {
+        width: 70%;
+    }
+}
+
+.formTitle {
+    color: #008080;
+    display: inline-block;
+}
+
+.smallSpacing {
+    letter-spacing: -6px;
+}
+
+.formTitleEmot {
+    font-size:32px;
+    font-weight:  normal;
+    display: inline-block;
+    color: #008080;
+    
+}
+
+.login_form {
+    background-color: #fff;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+form {
+    padding: 0 2em;
+}
+
+.customFormInput {
+    width: 100%;
+    border: 0px solid transparent;
+    border-radius: 0;
+    border-bottom: 1px solid #aaa;
+    padding: 1em .5em .5em;
+    padding-left: 2em;
+    outline: none;
+    margin: 1.5em auto;
+    transition: all .5s ease;
+}
+
+.form__input:focus {
+    border-bottom-color: #008080;
+    box-shadow: 0 0 5px rgba(0,80,80,.4);
+    border-radius: 4px;
+}
+
+.btn2 {
+    transition: all .5s ease;
+    width: 45%;
+    height: 36px;
+    border-radius: 7px;
+    color: #008080;
+    font-weight: 600;
+    background-color: #ddd;
+    border: 0px;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+.btn2:hover, .btn2:focus {
+    background-color: #008080;
+    color: #fff;
+}
+
+
+
+
+
+
+
 
 a.navbar-brand {
   white-space: normal;

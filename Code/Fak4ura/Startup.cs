@@ -23,6 +23,11 @@ namespace Fak4ura
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("Ciastko").AddCookie("Ciastko", options =>
+            {
+                options.Cookie.Name = "Ciastko";
+                options.LoginPath = "/Account/Login";
+            });
             services.AddRazorPages();
         }
 
@@ -43,8 +48,10 @@ namespace Fak4ura
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+           
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

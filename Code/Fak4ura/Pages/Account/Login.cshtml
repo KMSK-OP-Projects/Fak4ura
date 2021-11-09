@@ -1,0 +1,140 @@
+﻿@page
+@model Fak4ura.Pages.Account.LoginModel
+@{
+}
+<!-- to correspond with js -->
+<input id="passRecoveryResult" type="hidden" name="someValue" runat="server" value="@Model.passRecoveryResult">
+<input id="passLoginResult" type="hidden" name="someValue" runat="server" value="@Model.passLoginResult">
+
+
+<div class="container-fluid ">
+
+    <!-- Login-->
+    <div class="  main-content bg-success text-center " id="login-form">
+        <div class="col-md-6 text-center logoArea  ">
+           	<img src="~/img/logoCloud2.png" alt="logo" width="230"> 
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div>
+                    <h2 class="formTitle">Login</h2>
+                    <h4 class="formTitleEmot smallSpacing"> ⇢</h4>
+                    <!--<h3 class="formTitleEmot smallSpacing">］</h3>-->
+                </div>
+                <div>
+                    <form control="" class="form-group" asp-page-handler="Login">
+                        <div>
+                            <input type="text" asp-for="User.userName" name="username" id="username" class="customFormInput " placeholder="Nazwa użytkownika" required>
+                        </div>
+                        <div>
+                            <!-- <span class="fa fa-lock"></span> -->
+                            <input type="password" asp-for="User.password" name="password" id="password" class="customFormInput" placeholder="Haslo" required>
+                        </div>
+
+                        <div>
+                            <input type="submit" value="Submit" class="btn2">
+                        </div>
+                    </form>
+                </div>
+                <br>
+
+                <div>
+                    <p>Nie posiadasz konta? <a href="javascript:void('register-form-link');" class="register-form-link">Zarejestruj</a></p>
+                </div>
+                <div>
+                    <p>Zapomniałes hasła? <a href="javascript:void('forgot-form-link');" class="forgot-form-link">Odzyskaj</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Rejestracja-->
+
+    <div class=" main-content bg-success text-center" id="register-form">
+        <div class="col-md-6 text-center logoArea">
+            <img src="~/img/logoCloud2.png" alt="logo" width="230">
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div>
+                    <h2 class="formTitle">Rejestracja</h2>
+                    <h2 class="formTitleEmot"> 🗎</h2>
+                </div>
+                <div>
+                    <form control="" class="form-group">
+                        <div>
+                            <input type="text" name="Imie" id="name" class="customFormInput form-control-sm" placeholder="Imię" required>
+                        </div>
+
+                        <div>
+                            <input type="text" name="Nazwisko" id="lastName" class="customFormInput form-control-sm" placeholder="Nazwisko" required>
+                        </div>
+
+                        <div>
+                            <input type="password" name="pass" id="pass" class="customFormInput form-control-sm" placeholder="Hasło" required
+                                   onchange="checkIfPasswordIsEqual('displayPassError')" onkeyup="checkIfPasswordIsEqual('displayPassError')">
+                            <div id="displayPassError"> </div>
+                        </div>
+
+                        <div>
+                            <input type="password" name="confirmPass" id="confirmPass" class="customFormInput form-control-sm" placeholder="Potwierdź haslo" required
+                                   onchange="checkIfPasswordIsEqual('displayconfirmPassError')" onkeyup="checkIfPasswordIsEqual('displayconfirmPassError')">
+                            <div id="displayconfirmPassError"> </div>
+                        </div>
+
+                        <div>
+                            <input type="email" name="email" id="email" class="customFormInput form-control-sm" placeholder="E-mail" required>
+                        </div>
+
+                        <div>
+                            <input type="submit" value="Submit" class="btn2" id="registerFormSubmit">
+                        </div>
+                    </form>
+                </div>
+                <br>
+                <div>
+                    <p>Posiadasz konto? <a href="javascript:void('register-form-load');" class="login-form-link">Zaloguj.</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Odzyskaj-->
+
+    <div class=" main-content bg-success text-center" id="forgot-form">
+        <div class="col-md-6 text-center logoArea">
+            <img src="~/img/logoCloud2.png" alt="logo" width="230">
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div>
+                    <h2 class="formTitle">Odzyskaj hasło</h2>
+                    <h2 class="formTitleEmot">  🖂</h2>
+                </div>
+                <div>
+                    <form control="" class="form-group" asp-page-handler="remindMail">
+                        <div>
+                            <input type="email" id="odyzskajHaslo" class="customFormInput" placeholder="E-mail" required asp-for="emailAdress4Recovery">
+                        </div>
+                        <div>
+                            <input type="submit" value="Submit" class="btn2">
+                        </div>
+
+                    </form>
+                </div>
+                <br>
+                <div>
+                    <p>Nie posiadasz konta?  <a href="javascript:void('register-form-link');" class="register-form-link">Rejestracja</a></p>
+                </div>
+
+                <div>
+                    <p>Posiadasz konto? <a href="javascript:void('login-form-link');" class="login-form-link">Zaloguj</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

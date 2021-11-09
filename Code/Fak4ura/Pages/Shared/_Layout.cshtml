@@ -8,25 +8,88 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Fak4ura</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm flex navbar-light bg-white border-bottom box-shadow mb-3">
+            
+            <div class="col-md-2">
+                <a id="titleLogo" asp-area="" asp-page="/Index">
+                    <img id="logo" src="~/img/logo.png" alt="logo" style="height:40px">
+                </a>
+            </div>
+
+            <div class="form-group col-md-2"></div>
+
+
+            <div class="col-md-5" >
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="NavbarLinks ">
+                        <a style="margin: 25px; text-decoration: none; color: black; 
+                            font-size: 20px; font-weight: 600" asp-area="" asp-page="/Index">
+                            Przeglądaj faktury
+                        </a>
+
+                        <a style="color: black; text-decoration: none; font-size: 20px; 
+                            font-weight: 600" asp-area="" asp-page="/Index">
+                            Kontrahenci
+                        </a>
+                    </div>
+                }
+            </div>
+
+            <div class="col-md-3">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    ViewData["welcome"] = "Witaj, " + @User.Identity.Name;
+                }
+
+                <p id="welcomeSign" class=" "> @ViewData["welcome"] </p>
+
+                <div class="float-right row">
+
+
+                    <div class="dropdown dropleft ">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <a class="nav-link " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/img/userGraph6InColor.png" alt="logo" style="margin-right:16px; height:23px">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-page="/Account/UserData">Dane użytownika</a>
+                                <a class="dropdown-item" asp-page="/Account/Logout">Wyloguj</a>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <a class="nav-link " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/img/userGraph6.png" alt="logo" style="margin-right:16px; height:23px">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-page="/Account/Login">Zaloguj</a>
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="dropdown dropleft ">
+                        <a class="nav-link " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="~/img/menuGraph3.png" alt="logo" style="  height:20px; margin-right:10px;   ">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-area="" asp-page="/Index">O nas</a>
+                            <a class="dropdown-item" href="#">Aktualności</a>
+                            <a class="dropdown-item" href="#">Kontakt</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+          
+
         </nav>
     </header>
     <div class="container">
