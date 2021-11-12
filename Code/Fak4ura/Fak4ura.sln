@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fak4ura", "Fak4ura.csproj", "{5FE667A7-D1D0-47BB-B646-1DA5E05BB188}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fak4ura", "Fak4ura.csproj", "{5FE667A7-D1D0-47BB-B646-1DA5E05BB188}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LIB", "LIB", "{B624D6D0-DB5A-48ED-84D8-0E1D3EB9A4A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceGenerator", "..\InvoiceGenerator\InvoiceGenerator.csproj", "{D85B9F27-54ED-4A48-86D1-86993C520531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceGenerator", "..\InvoiceGenerator\InvoiceGenerator.csproj", "{D85B9F27-54ED-4A48-86D1-86993C520531}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -13,6 +13,12 @@ namespace Fak4ura
 {
     public class Startup
     {
+        internal class ConnectionStrings {
+            public string OracleDatabase { get; set; }
+
+        }
+
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +30,7 @@ namespace Fak4ura
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSingleton(Configuration.GetSection("ConnectionStrings").Get<ConnectionStrings>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
