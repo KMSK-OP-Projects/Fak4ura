@@ -14,6 +14,7 @@ namespace Fak4ura
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            Console.WriteLine("234234234");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
