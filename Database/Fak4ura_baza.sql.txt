@@ -13,6 +13,7 @@ CREATE TABLE F4_Uzytkownicy (
     --id        NUMBER GENERATED ALWAYS AS IDENTITY,
     imie      VARCHAR2(30) NOT NULL,
     nazwisko  VARCHAR2(50) NOT NULL,
+    nazwa_firmy VARCHAR2(50),
     nazwisko_rodowe VARCHAR(50),
     login     VARCHAR2(20) NOT NULL,
     haslo     VARCHAR2(100)NOT NULL,
@@ -22,7 +23,8 @@ CREATE TABLE F4_Uzytkownicy (
     kraj      VARCHAR(50),
     nr_dokumentu VARCHAR(20),
     typ_dokumentu VARCHAR(7) CONSTRAINT f4_u_td_chk CHECK (typ_dokumentu IN ('DOWOD', 'PASZPORT')),
-    email     VARCHAR(60),
+    email     VARCHAR(60) NOT NULL,
+    telefon  VARCHAR(20),
     nip     VARCHAR(20),
     aktywny   NUMBER(1,0) CONSTRAINT f4_u_a_chk CHECK (aktywny IN (0, 1))
 );
