@@ -25,6 +25,8 @@ CREATE TABLE F4_Uzytkownicy (
     email     VARCHAR(60) NOT NULL,
     telefon  VARCHAR(20),
     nip     VARCHAR(20),
+    bank  VARCHAR(20),
+    numer_konta     VARCHAR(20),
     aktywny   NUMBER(1,0) CONSTRAINT f4_u_a_chk CHECK (aktywny IN (0, 1))
 );
 ALTER TABLE F4_Uzytkownicy ADD CONSTRAINT f4_u_pk PRIMARY KEY ( email );
