@@ -15,7 +15,6 @@ CREATE TABLE F4_Uzytkownicy (
     nazwisko  VARCHAR2(50) NOT NULL,
     nazwa_firmy VARCHAR2(50),
     nazwisko_rodowe VARCHAR(50),
-    login     VARCHAR2(20) NOT NULL,
     haslo     VARCHAR2(100)NOT NULL,
     ulica     VARCHAR(50),
     kod_pocztowy VARCHAR(8),
@@ -28,7 +27,7 @@ CREATE TABLE F4_Uzytkownicy (
     nip     VARCHAR(20),
     aktywny   NUMBER(1,0) CONSTRAINT f4_u_a_chk CHECK (aktywny IN (0, 1))
 );
-ALTER TABLE F4_Uzytkownicy ADD CONSTRAINT f4_u_pk PRIMARY KEY ( login );
+ALTER TABLE F4_Uzytkownicy ADD CONSTRAINT f4_u_pk PRIMARY KEY ( email );
 
 
 CREATE TABLE F4_Kontrahenci (
@@ -61,7 +60,7 @@ CREATE TABLE F4_Faktury (
 );
 ALTER TABLE F4_Faktury ADD (
     CONSTRAINT f4_f_pk PRIMARY KEY ( id ),
-    CONSTRAINT f4_f_fk_u FOREIGN KEY (uzytkownik_login) REFERENCES F4_Uzytkownicy( login ),
+    CONSTRAINT f4_f_fk_u FOREIGN KEY (uzytkownik_login) REFERENCES F4_Uzytkownicy( email ),
     CONSTRAINT f4_f_fk_k FOREIGN KEY (kontrahent_id) REFERENCES F4_Kontrahenci( id )
 );
 
