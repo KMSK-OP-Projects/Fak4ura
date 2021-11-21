@@ -3,7 +3,7 @@
 
 
 -- Master user
-INSERT INTO F4_Uzytkownicy VALUES ('admin',' ',' ','admin','4dmin1!','','','','Polska','','','admin@fak4ura.pl','',1);
+INSERT INTO F4_Uzytkownicy VALUES ('admin',' ','','','4dmin1!','','','','Polska','','','admin@fak4ura.pl','','',1);
 
 -- Regular user
 -- INSERT INTO F4_Uzytkownicy VALUES ('Jan','Zysk','Zysk','jkowalski','czystyzysk1','Zyskowna 12','00-200','Kryspinow','Polska','AAA100001','DOWOD','jan.zysk@gmail.com','123-123-45-45',1);
