@@ -13,15 +13,17 @@ CREATE TABLE F4_Uzytkownicy (
     --id        NUMBER GENERATED ALWAYS AS IDENTITY,
     imie      VARCHAR2(30) NOT NULL,
     nazwisko  VARCHAR2(50) NOT NULL,
-    nazwisko_rodowe VARCHAR(50) NOT NULL,
+    nazwisko_rodowe VARCHAR(50),
     login     VARCHAR2(20) NOT NULL,
-    haslo     VARCHAR2(100),
+    haslo     VARCHAR2(100)NOT NULL,
     ulica     VARCHAR(50),
     kod_pocztowy VARCHAR(8),
-    kraj      VARCHAR(50) NOT NULL,
+    miejscowosc  VARCHAR(50),
+    kraj      VARCHAR(50),
     nr_dokumentu VARCHAR(20),
     typ_dokumentu VARCHAR(7) CONSTRAINT f4_u_td_chk CHECK (typ_dokumentu IN ('DOWOD', 'PASZPORT')),
     email     VARCHAR(60),
+    nip     VARCHAR(20),
     aktywny   NUMBER(1,0) CONSTRAINT f4_u_a_chk CHECK (aktywny IN (0, 1))
 );
 ALTER TABLE F4_Uzytkownicy ADD CONSTRAINT f4_u_pk PRIMARY KEY ( login );
