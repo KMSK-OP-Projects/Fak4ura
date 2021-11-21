@@ -24,8 +24,8 @@ CREATE TABLE F4_Uzytkownicy (
     typ_dokumentu VARCHAR(7) CONSTRAINT f4_u_td_chk CHECK (typ_dokumentu IN ('DOWOD', 'PASZPORT')),
     email     VARCHAR(60) NOT NULL,
     telefon  VARCHAR(20),
-    nip     VARCHAR(20),
-    bank  VARCHAR(20),
+    nip     VARCHAR(30),
+    bank  VARCHAR(50),
     numer_konta     VARCHAR(20),
     aktywny   NUMBER(1,0) CONSTRAINT f4_u_a_chk CHECK (aktywny IN (0, 1))
 );
