@@ -24,6 +24,7 @@ namespace Fak4ura.Pages.Account
         //Password Reminder
         [BindProperty]
         public string emailAdress4Recovery { get; set; }
+        [BindProperty (SupportsGet =true)]
         public string passRecoveryResult { get; set; }
 
 
@@ -79,13 +80,13 @@ namespace Fak4ura.Pages.Account
 
             if (!string.IsNullOrEmpty(userInfo.Password))
             {
-                var newRandomPassword = randomStr.Generate();
-                var hashedPasswordInput = BCrypt.Net.BCrypt.HashPassword(newRandomPassword);
-
-               
-                new UpdateUserData(hashedPasswordInput, emailAdress4Recovery);
-
-                passRecoveryResult = userInfo.sendIt("New password: " + newRandomPassword);
+                var rndString = randomStr.Generate();
+                var salt  = BCrypt.Net.BCrypt.GenerateSalt();
+                var verifyingHash = BCrypt.Net.BCrypt.HashPassword(userInfo.Email + rndString, salt);
+                var obj = new VerifyingHash();
+                obj.InsertHash(userInfo.UzytkownikId, verifyingHash , salt);
+                var link = $"https://localhost:5001/Account/ForgotPass?verifyingHash={verifyingHash}";
+                passRecoveryResult = userInfo.sendIt("Klik: "+ link);
             }
                 
             else
@@ -103,8 +104,9 @@ namespace Fak4ura.Pages.Account
                 passRegistrationResult = "⛌ Email powiązany z innym kontem";
                 return;
             }
-            var hashedPasswordInput = BCrypt.Net.BCrypt.HashPassword(passwordInput);
-            Registration reg = new Registration(NameInput, LastnameInput, EmailInput, hashedPasswordInput);
+            var salt = BCrypt.Net.BCrypt.GenerateSalt();
+            var hashedPasswordInput = BCrypt.Net.BCrypt.HashPassword(passwordInput , salt);
+            Registration reg = new Registration(NameInput, LastnameInput, EmailInput, hashedPasswordInput, salt);
             passRegistrationResult = reg.result;
         }
     }

@@ -73,31 +73,7 @@
                         <label for="eCounterPartyNazwa" class="mb-1" style="font-weight:500">Nazwa/Firma</label>
                         <input type="text"  asp-for="CounterPartyInfo.NazwaFirmy"
                                class="form-control bg-light" id="eCounterPartyNazwa/Firma" required>
-                    </div>
-
-                    <div class="form-group mb-2 ">
-                        <label for="eCounterPartyAdres" class="mb-1" style="font-weight:500">Adres</label>
-                        <input type="text"  asp-for="CounterPartyInfo.Ulica"
-                               class="form-control bg-light" id="eCounterPartyAdres" required>
-                    </div>
-
-                    <div class="form-group mb-0  ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="eCounterPartyMiejscowosc" class="mb-1" style="font-weight:500">Miejscowość</label>
-                                <input type="text" class="form-control bg-light" id="eCounterPartyMiejscowosc" required
-                                       asp-for="CounterPartyInfo.Miejscowosc">
-                            </div>
-                            <div class="form-group col-md-6 ">
-                                <label for="eCounterPartyKodPocztowy" class="mb-1" style="font-weight:500">Kod pocztowy</label>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">xx-xxx</span>
-                                    <input type="text"  asp-for="CounterPartyInfo.KodPocztowy"
-                                        class="form-control bg-light" id="eCounterPartyKodPocztowy" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>     
 
                     <div class="form-group mb-2 ">
                         <label for="eCounterPartyNIP" class="mb-1" style="font-weight:500">NIP</label>
@@ -117,8 +93,32 @@
 
                     <div class="form-group  mb-2">
                         <label for="eCounterPartyTelefon" class="mb-1" style="font-weight:500">Telefon</label>
-                        <input type="tel" class="form-control bg-light" id="eCounterPartyTelefon" 
-                               asp-for="CounterPartyInfo.Telefon"required>
+                        <input type="tel" class="form-control bg-light" id="eCounterPartyTelefon"
+                               asp-for="CounterPartyInfo.Telefon" required>
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="eCounterPartyAdres" class="mb-1" style="font-weight:500">Adres</label>
+                        <input type="text" asp-for="CounterPartyInfo.Ulica"
+                               class="form-control bg-light" id="eCounterPartyAdres" required>
+                    </div>
+
+                    <div class="form-group mb-0  ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="eCounterPartyMiejscowosc" class="mb-1" style="font-weight:500">Miejscowość</label>
+                                <input type="text" class="form-control bg-light" id="eCounterPartyMiejscowosc" required
+                                       asp-for="CounterPartyInfo.Miejscowosc">
+                            </div>
+                            <div class="form-group col-md-6 ">
+                                <label for="eCounterPartyKodPocztowy" class="mb-1" style="font-weight:500">Kod pocztowy</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">xx-xxx</span>
+                                    <input type="text" asp-for="CounterPartyInfo.KodPocztowy"
+                                           class="form-control bg-light" id="eCounterPartyKodPocztowy" required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

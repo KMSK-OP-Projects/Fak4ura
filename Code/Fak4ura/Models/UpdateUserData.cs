@@ -10,9 +10,10 @@ namespace Fak4ura.Models
     public class UpdateUserData:DbConnection
     {
         public UpdateUserData() { }
-        public UpdateUserData(string haslo, string userIdentifier)
+        public UpdateUserData(string haslo, string salt, string userIdentifier)
         {
-            update = $"UPDATE F4_Uzytkownicy SET haslo = '{haslo}' WHERE email = '{userIdentifier}'";
+            update = $"UPDATE F4_Uzytkownicy SET " +
+                $"haslo = '{haslo}' , sol = '{salt}' WHERE uzytkownik_id = '{userIdentifier}'";
             result = insertData(update);
         }
 
@@ -23,7 +24,7 @@ namespace Fak4ura.Models
             $" imie = '{obj.Imie}' , nazwisko = '{obj.Nazwisko}' , nazwa_firmy = '{obj.NazwaFirmy}' , email = '{obj.Email}' " +
             $" ,ulica = '{obj.Ulica}' , kod_pocztowy = '{obj.KodPocztowy}' , miejscowosc = '{obj.Miejscowosc}' , nip = '{obj.Nip}' " +
             $" ,telefon = '{obj.Telefon}' , bank = '{obj.Bank}' , numer_konta = '{obj.NumerKonta}' " +
-            $"WHERE email = '{userIdentifier}'";
+            $"WHERE uzytkownik_id = '{userIdentifier}'";
             
             result = insertData(update);
         }

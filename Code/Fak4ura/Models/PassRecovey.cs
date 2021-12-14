@@ -16,6 +16,7 @@ namespace Fak4ura.Models
             Email = email;
             getUserPassword(email);
         }
+        public string UzytkownikId { get; set; }
         public string Email { get;set;}
         public string Password { get; set; }
     
@@ -23,7 +24,7 @@ namespace Fak4ura.Models
         private void getUserPassword(string email)
         {
             Console.WriteLine("--->@PassRecovery()");
-            string sqlsqlQuery = $"select haslo from F4_Uzytkownicy Where email = '{email}'";
+            string sqlsqlQuery = $"select * from F4_Uzytkownicy Where email = '{email}'";
             OracleConnection oracleConn = new OracleConnection(ConnString);
             Console.WriteLine("Open connection...");
             oracleConn.Open();
@@ -39,12 +40,13 @@ namespace Fak4ura.Models
             {
                 while (dataReader.Read())
                 {
+                    UzytkownikId = (dataReader["uzytkownik_id"].ToString());
                     Password = (dataReader["haslo"].ToString());
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("--->@PassRecovery()"+ ex.Message);
             }
             finally
             {

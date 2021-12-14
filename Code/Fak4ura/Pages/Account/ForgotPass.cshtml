@@ -1,0 +1,38 @@
+﻿@page
+@model Fak4ura.Pages.Account.ForgotPassModel
+@{
+}
+
+@if (Model.Confirmed == true)
+{
+    <div class=" d-flex justify-content-center  " style="margin-top: 60px;">
+        <div class="container-fluid" style="width:35%">
+            <div>
+                <h2 class="formTitle mb-4">Wprowadź nowe haslo</h2>
+            </div>
+            <div>
+                <form method="post" class="form-group">
+                    <input type="hidden" asp-for="hashStr.UzytkownikId" />
+                    <div>
+                        <input type="password" id="forgotPassInput" class="form-control bg-light mb-1 "
+                               placeholder="Haslo"  
+                               oninput="checkIfPasswordIsEqual3('displayForgotPassError')" asp-for="newPasswordInput" required>
+                        <div id="displayForgotPassError"> </div>
+                    </div>
+                    <div>
+                        <input type="password" id="forgotConfirmPassInput" class="form-control bg-light  mb-1 "
+                               placeholder="Potwierdź haslo" oninput="checkIfPasswordIsEqual3('displayForgotconfirmPassError')" 
+                               required>
+                        <div id="displayForgotconfirmPassError"> </div>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Zapisz" id="forgotFormSubmitBtn" style="margin-top:15px" class=" btn btn-warning"
+                               asp-page-handler="NewPass">
+                    </div>
+                </form>
+            </div>
+            <br>
+        </div>
+    </div>
+}

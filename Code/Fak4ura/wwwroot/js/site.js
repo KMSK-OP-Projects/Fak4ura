@@ -193,6 +193,23 @@ function checkIfPasswordIsEqual2(sender) {
 	}
 }
 
+function checkIfPasswordIsEqual3(sender) {
+	var pass = document.getElementById("forgotPassInput").value;
+	var confirmPass = document.getElementById("forgotConfirmPassInput").value;
+	var displayconfirmPassError = document.getElementById("displayForgotconfirmPassError");
+	var displayPassError = document.getElementById("displayForgotPassError");
+	document.getElementById("forgotFormSubmitBtn").disabled = false;
+	if (pass && confirmPass) {
+		displayPassError.innerText = "";
+		displayconfirmPassError.innerText = "";
+		if (pass != confirmPass) {
+			document.getElementById(sender).innerText = "Podane hasła się nie zgadzają!";
+			document.getElementById(sender).style.color = "tomato";
+			document.getElementById("forgotFormSubmitBtn").disabled = true;
+		}
+	}
+}
+
 
 //CREATES POPPINGUP ALERT 
 function getAlert(msg, duration)

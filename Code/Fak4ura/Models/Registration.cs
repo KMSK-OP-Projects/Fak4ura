@@ -9,10 +9,10 @@ namespace Fak4ura.Models
     public class Registration: DbConnection
     {
         public Registration() { }
-        public Registration(string imie, string nazwisko, string email, string haslo)
+        public Registration(string imie, string nazwisko, string email, string haslo, string salt)
         {
-            insert = "INSERT INTO F4_Uzytkownicy(imie, nazwisko, haslo, email) VALUES " +
-            $"('{imie}','{nazwisko}', '{haslo}' ,'{email}')";
+            insert = "INSERT INTO F4_Uzytkownicy(imie, nazwisko, haslo, email, sol) VALUES " +
+            $"('{imie}','{nazwisko}', '{haslo}' ,'{email}', '{salt}')";
             result = insertData(insert);
         }
         public string insert { get; set; }

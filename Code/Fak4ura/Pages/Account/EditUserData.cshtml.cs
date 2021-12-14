@@ -16,6 +16,7 @@ namespace Fak4ura.Pages.Account
         [BindProperty(SupportsGet =true)]
         public UserData UserInfo { get; set; }
         Claim currentLoggedInEmail { get; set; }
+        Claim currentLoggedInUserId { get; set; }
 
         public void OnGet()
         {
@@ -26,16 +27,17 @@ namespace Fak4ura.Pages.Account
 
         public void OnPostSaveNewPass(string newPass)
         {
-            currentLoggedInEmail = User.FindFirst(ClaimTypes.Email);
-            var hashedPasswordInput = BCrypt.Net.BCrypt.HashPassword(newPass);
-            new UpdateUserData(hashedPasswordInput, currentLoggedInEmail.Value);
+            currentLoggedInUserId = User.FindFirst(ClaimTypes.GivenName);
+            var salt = BCrypt.Net.BCrypt.GenerateSalt();
+            var hashedPasswordInput = BCrypt.Net.BCrypt.HashPassword(newPass, salt);
+            new UpdateUserData(hashedPasswordInput, salt, currentLoggedInUserId.Value);
         }
 
 
         public IActionResult OnPostEditUserData()
         {
-            currentLoggedInEmail = User.FindFirst(ClaimTypes.Email);
-            var obj = new UpdateUserData(UserInfo, currentLoggedInEmail.Value);
+            currentLoggedInUserId = User.FindFirst(ClaimTypes.GivenName);
+            var obj = new UpdateUserData(UserInfo, currentLoggedInUserId.Value);
             var x = obj.result;
             return RedirectToPage("/Account/ViewUserData", new { senderEditUserData = x });
         }

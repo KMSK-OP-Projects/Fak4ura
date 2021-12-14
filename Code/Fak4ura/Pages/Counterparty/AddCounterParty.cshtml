@@ -70,6 +70,29 @@
                                class="form-control bg-light" id="aCounterPartyNazwa/Firma" required>
                     </div>
 
+
+                    <div class="form-group mb-2 ">
+                        <label for="aCounterPartyNIP" class="mb-1" style="font-weight:500">NIP</label>
+                        <input type="text" asp-for="CounterPartyInfo.Nip"
+                               class="form-control bg-light" id="aCounterPartyNIP" required>
+                    </div>
+
+                </div>
+
+
+                <!--EMPTY SPACE-->
+                <div class="form-group col-md-1"></div>
+
+
+                <!--SECOND COLUMN-->
+                <div class=" col-md-4">
+
+                    <div class="form-group  mb-2">
+                        <label for="aCounterPartyTelefon" class="mb-1" style="font-weight:500">Telefon</label>
+                        <input type="tel" class="form-control bg-light" id="aCounterPartyTelefon" required
+                               asp-for="CounterPartyInfo.Telefon">
+                    </div>
+
                     <div class="form-group mb-2 ">
                         <label for="aCounterPartyAdres" class="mb-1" style="font-weight:500">Adres</label>
                         <input type="text" asp-for="CounterPartyInfo.Ulica"
@@ -94,28 +117,8 @@
                         </div>
                     </div>
 
-                    <div class="form-group mb-2 ">
-                        <label for="aCounterPartyNIP" class="mb-1" style="font-weight:500">NIP</label>
-                        <input type="text" asp-for="CounterPartyInfo.Nip"
-                               class="form-control bg-light" id="aCounterPartyNIP" required>
-                    </div>
-
                 </div>
 
-
-                <!--EMPTY SPACE-->
-                <div class="form-group col-md-1"></div>
-
-
-                <!--SECOND COLUMN-->
-                <div class=" col-md-4">
-
-                    <div class="form-group  mb-2">
-                        <label for="aCounterPartyTelefon" class="mb-1" style="font-weight:500">Telefon</label>
-                        <input type="tel" class="form-control bg-light" id="aCounterPartyTelefon" required
-                               asp-for="CounterPartyInfo.Telefon">
-                    </div>
-                </div>
             </div>
         </div>
     </div>

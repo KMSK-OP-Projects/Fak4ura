@@ -1118,3 +1118,4 @@ C:\Users\kr1p0\Desktop\Fak4\Fak4ura\Code\Fak4ura\obj\Debug\net5.0\Razor\Pages\Ac
 C:\Users\kr1p0\Desktop\Fak4\Fak4ura\Code\Fak4ura\obj\Debug\net5.0\Razor\Pages\Account\EditUserData.cshtml.g.cs
 C:\Users\kr1p0\Desktop\Fak4\Fak4ura\Code\Fak4ura\obj\Debug\net5.0\Razor\Pages\Counterparty\PreviewCounterparty.cshtml.g.cs
 C:\Users\kr1p0\Desktop\Fak4\Fak4ura\Code\Fak4ura\bin\Debug\net5.0\BCrypt.Net-Next.dll
+C:\Users\kr1p0\Desktop\Fak4\Fak4ura\Code\Fak4ura\obj\Debug\net5.0\Razor\Pages\Account\ForgotPass.cshtml.g.cs
