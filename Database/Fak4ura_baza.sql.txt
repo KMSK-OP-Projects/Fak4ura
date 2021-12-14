@@ -81,4 +81,12 @@ ALTER TABLE F4_Faktury_pozycje ADD (
 );
 
 
+CREATE TABLE F4_tempHash (
+    id int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    email_id int NOT NULL,
+    sol VARCHAR2(20) NOT NULL,
+    hash_string VARCHAR2(70) NOT NULL,
+    data_utworzenia TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 
