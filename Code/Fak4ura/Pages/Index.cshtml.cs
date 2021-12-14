@@ -19,9 +19,10 @@ namespace Fak4ura.Pages
             _logger = logger;
         }
 
-        public void OnGet()
-        {
 
+        public ActionResult OnGet()
+        {
+            return RedirectToPage("/Invoice/OverviewInvoice");
         }
     }
 }

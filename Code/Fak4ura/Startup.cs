@@ -13,12 +13,6 @@ namespace Fak4ura
 {
     public class Startup
     {
-        internal class ConnectionStrings {
-            public string OracleDatabase { get; set; }
-
-        }
-
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,13 +23,17 @@ namespace Fak4ura
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //For Authentication
             services.AddAuthentication("Ciastko").AddCookie("Ciastko", options =>
             {
                 options.Cookie.Name = "Ciastko";
                 options.LoginPath = "/Account/Login";
             });
             services.AddRazorPages();
-            services.AddSingleton(Configuration.GetSection("ConnectionStrings").Get<ConnectionStrings>());
+
+            //For Ajax
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

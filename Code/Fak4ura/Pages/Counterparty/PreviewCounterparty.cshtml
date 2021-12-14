@@ -1,0 +1,116 @@
+﻿@page
+@model Fak4ura.Pages.Counterparty.PreviewCounterpartyModel
+@{
+}
+
+
+<div class="underNavBar">
+    <div class="row justify-content-end " style="padding:10px 25px">
+        <a   asp-page="/CounterParty/EditCounterParty" 
+           asp-route-selectedCounterPartyId="@Model.selectedCounterPartyId">
+            <div class="ml-4">
+                <input type="button" class="btn btn-light" value="Edytuj">
+            </div>
+        </a>
+        <div class="ml-4">
+            <a asp-page=" ">
+                <input type="button" class="btn btn-light" value="Usuń">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="mainContainer">
+
+
+
+    <div class="form-row justify-content-center " style="margin-top: 50px;">
+
+        <!--FIRST COLUMN-->
+        <div class=" col-md-4" style=" ">
+            <div id="userGraphUserDataPage">
+                <img id="" src="~/img/handShake.png" alt="userGraph6.png">
+            </div>
+        </div>
+
+
+
+        <!--SECOND COLUMN-->
+        <div class=" col-md-7" style="margin-right: -40px; margin-left: 15px;">
+
+            <div class="form-group mb-0 form-inline" style="margin-top:-10px">
+                <label for="pCounterPartyImie" class="mb-1 labelInline">Imię</label>
+                <input type="text" class="inputInline form-control customFormInput2 " 
+                       id="pCounterPartyImie" asp-for="CounterPartyInfo.Imie" 
+                       style="width: 60%; background-color: transparent " readonly>
+            </div>
+
+
+            <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                <label for="pCounterPartyNazwisko" class="mb-1 labelInline">Nazwisko</label>
+                <input type="text" class="form-control customFormInput2 inputInline" 
+                       id="pCounterPartyNazwisko" asp-for="CounterPartyInfo.Nazwisko" 
+                       style=" width: 60%; background-color: transparent" readonly>
+            </div>
+
+
+            <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                <label for="pCounterPartyEmail" class="mb-1 labelInline">E-mail</label>
+                <input type="email" class="form-control customFormInput2 inputInline" 
+                       id="pCounterPartyEmail" asp-for="CounterPartyInfo.Email" 
+                       style=" width: 60%; background-color: transparent" readonly>
+            </div>
+
+
+            <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                <label for="pCounterPartyNazwa/Firma" class="mb-1 labelInline">Nazwa/Firma</label>
+                <input type="text" class="form-control customFormInput2 inputInline" 
+                       id="pCounterPartyNazwa/Firma" asp-for="CounterPartyInfo.NazwaFirmy"
+                       style=" width: 60%; background-color: transparent" readonly>
+            </div>
+
+
+            <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                <label for="pCounterPartyAdres" class="mb-1 labelInline">Adres</label>
+                <input type="text" class="form-control customFormInput2 inputInline" 
+                       id="pCounterPartyAdres" asp-for="CounterPartyInfo.Ulica"
+                       style=" width: 60%;background-color:transparent" readonly>
+            </div>
+
+
+
+            <div class="form-group mb-0  form-inline" style="margin-top:-10px">
+                <label for="pCounterPartyMiejscowosc" class="mb-1 labelInline">Miejscowość</label>
+                <input type="text" class="form-control customFormInput2 inputInline" id="pCounterPartyMiejscowosc"
+                       style="width: 60%; background-color: transparent " 
+                       asp-for="CounterPartyInfo.Miejscowosc"readonly>
+            </div>
+
+
+            <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                <label for="pCounterPartyKodPocztowy" class="mb-1 labelInline">Kod pocztowy</label>
+                <input type="text" class="form-control customFormInput2 inputInline" 
+                       id="pCounterPartyKodPocztowy" asp-for="CounterPartyInfo.KodPocztowy"
+                       style=" width: 60%; background-color: transparent" readonly>
+            </div>
+
+
+
+            <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                <label for="pCounterPartyNIP" class="mb-1 labelInline">NIP</label>
+                <input type="text" class="form-control customFormInput2 inputInline" 
+                       id="pCounterPartyNIP" asp-for="CounterPartyInfo.Nip" 
+                       style=" width: 60%; background-color: transparent" readonly>
+            </div>
+
+            <div class="form-group  mb-0  form-inline " style="margin-top:-10px">
+                <label for="pCounterPartyTelefon" class="mb-1 labelInline">Telefon</label>
+                <input type="tel" class="form-control customFormInput2 inputInline" id="pCounterPartyTelefon"
+                       style=" width: 60%; background-color: transparent"
+                       asp-for="CounterPartyInfo.Telefon" readonly>
+            </div>
+        </div>
+    </div>
+</div>

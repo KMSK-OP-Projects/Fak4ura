@@ -10,6 +10,8 @@ namespace Fak4ura.Pages
 {
     public class PrivacyModel : PageModel
     {
+        [BindProperty(Name = "id1", SupportsGet = true)]
+        public int id1 { get; set; }
         private readonly ILogger<PrivacyModel> _logger;
 
         public PrivacyModel(ILogger<PrivacyModel> logger)
@@ -19,6 +21,8 @@ namespace Fak4ura.Pages
 
         public void OnGet()
         {
+
         }
     }
 }
+

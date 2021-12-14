@@ -1,0 +1,223 @@
+﻿@page
+@model Fak4ura.Pages.Account.UserDataModel
+@{
+}
+
+<!-- For Ajax-->
+@Html.AntiForgeryToken()
+
+
+
+
+
+<div id="AccountUserDataModelDiV">
+
+    <form asp-page-handler="EditUserData" >
+        <div class="underNavBar">
+            <div class="row justify-content-end " style="padding:10px 25px">
+                <div class="">
+                    <input type="button" class="btn btn-light" value="Zmień hasło"
+                           onclick="displayChangePassWindow()">
+                </div>
+                <div class="ml-4">
+                    <input type="submit" class="btn btn-light" value="Zapisz">
+                </div>
+            </div>
+        </div>
+
+        <div class="mainContainer">
+            <div>
+                <div class="form-row justify-content-center " style="margin-top: 50px;">
+
+                    <!--FIRST COLUMN-->
+                    <div class=" col-md-4" style="  margin-top:-8px;">
+                        <div id="userGraphUserDataPage">
+                            <img id="" src="~/img/userGraph6InColorCircle.png" alt="userGraph6.png">
+                        </div>
+                    </div>
+
+
+                    <!--EMPTY SPACE-->
+                    <div class="form-group col-md-1"></div>
+
+
+                    <!--SECOND COLUMN-->
+                    <div class=" col-md-4">
+
+                        <div class="form-group mb-2 ">
+                            <label for="userDataImie" class="mb-1" style="font-weight:500">Imię</label>
+                            <input type="text" class="form-control bg-light" id="userDataImie"
+                                   asp-for="UserInfo.Imie" required>
+                        </div>
+
+                        <div class="form-group mb-2 ">
+                            <label for="userDataNazwisko" class="mb-1"  style="font-weight:500">Nazwisko</label>
+                            <input type="text" class="form-control bg-light" id="userDataNazwisko"
+                                   asp-for="UserInfo.Nazwisko" required>
+                        </div>
+
+
+                        <div class="form-group mb-2 ">
+                            <label for="userDataEmail" class="mb-1"  style="font-weight:500">E-mail</label>
+                            <input type="email" class="form-control bg-light" id="userDataEmail"
+                                   asp-for="UserInfo.Email" required>
+                        </div>
+
+                        <div class="form-group mb-4 ">
+                            <label for="userDataHaslo" class="mb-1"  style="font-weight:500">Haslo</label>
+                            <input type="password" class="form-control " id="userDataHaslo"
+                                   style="background-color: #e1e2e6" readonly>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <hr style="width:82%"/>
+
+
+                <div class="form-row justify-content-center" style=" margin: 20px 0 ">
+                    <!--FIRST COLUMN-->
+                    <div class=" col-md-4">
+
+                        <div class="form-group mb-2 ">
+
+                            <label for="Nazwa/Firma" class="mb-1"  style="font-weight:500">Nazwa/Firma</label>
+                            <input type="text" class="form-control bg-light" id="Nazwa/Firma"
+                                   asp-for="UserInfo.NazwaFirmy" required>
+                        </div>
+
+                        <div class="form-group mb-2 ">
+                            <label for="userDataAdres" class="mb-1"  style="font-weight:500">Adres</label>
+                            <input type="text" class="form-control bg-light" id="userDataAdres"
+                                   asp-for="UserInfo.Ulica" required>
+                        </div>
+
+                        <div class="form-group mb-0  ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="userDataMiejscowosc" class="mb-1"  style="font-weight:500">Miejscowość</label>
+                                    <input type="text" class="form-control bg-light" id="userDataMiejscowosc"
+                                           asp-for="UserInfo.Miejscowosc" required>
+                                </div>
+                                <div class="form-group col-md-6 ">
+                                    <label for="userDataKodPocztowy" class="mb-1"  style="font-weight:500">Kod pocztowy</label>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">xx-xxx</span>
+                                        <input type="text" class="form-control bg-light" id="userDataKodPocztowy"
+                                               asp-for="UserInfo.KodPocztowy" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-2 ">
+                            <label for="NIP" class="mb-1"  style="font-weight:500">NIP</label>
+                            <input type="text" class="form-control bg-light" id="NIP"
+                                   asp-for="UserInfo.Nip" required>
+                        </div>
+
+                    </div>
+
+
+                    <!--EMPTY SPACE-->
+                    <div class="form-group col-md-1"></div>
+
+
+                    <!--SECOND COLUMN-->
+                    <div class=" col-md-4">
+
+                        <div class="form-group  mb-2">
+                            <label for="Telefon" class="mb-1"  style="font-weight:500">Telefon</label>
+                            <input type="tel" class="form-control bg-light" id="userDataTelefon"
+                                   asp-for="UserInfo.Telefon" required>
+                        </div>
+
+
+                        <div class="form-group mb-2 ">
+                            <label for="nazwaBnaku" class="mb-1"  style="font-weight:500">Bank</label>
+                            <input type="text" id="userDataNazwaBnaku" class="form-control bg-light"
+                                   asp-for="UserInfo.Bank" required />
+                        </div>
+
+
+                        <div class="form-group mb-2 ">
+                            <label for="userDataNrKonta" class="mb-1"  style="font-weight:500">Numer konta</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" id="userDataNrKonta" class="form-control bg-light"
+                                       asp-for="UserInfo.NumerKonta" required />
+                            </div>
+
+                        </div>
+                        <div>
+                            <div class="form-group " style="margin-top:28px">
+                                <label for="userDataFileUpload" class="custom-file-upload">⇪</label>
+                                <label for="userDataFileUpload" style="font-size: 20px; font-weight: 500">&nbsp Logo firmy </label>
+                                <input id="userDataFileUpload" type="file" style="font-size: 44px;"
+                                       onchange="onUserDataImageSelected(event)" />
+                            </div>
+
+                            <!--  <div class="form-group " style="margin-top:20px">
+                            <label for="exampleFormControlFile1">Wybierz logo</label>
+                            <input type="file" class="form-control-file " id="" onchange="onFileSelected(event)">
+                        </div>
+                                -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+           </div>
+    </form>
+
+    <div id=" " class="  col-md-13  row justify-content-center" style="margin-top:-25px">
+        <div id="userAccountLogoInput" style="align-items: center; justify-content: center; display:flex ;">
+            <img id="logoImage" src="">
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<div id="changePassWindow" style="visibility:hidden">
+    <form class=" " style="opacity:0.77 ; padding:20px;border: solid #ddd 1px; border-radius: 12px;
+        background-color: #ececec; width: 380px; height: 320px;">
+
+        <h4 class="d-inline-flex mb-4"> Zmień hasło</h4>
+        <button id="closeChangePassWindowBtn" class="btn d-inline-flex float-lg-right"
+                style="margin:-15px -15px 0 0" onclick="closeChangePassWindow()">
+            ✕
+        </button>
+
+
+
+        <div class="form-group mb-4 col-12  " style=" ">
+            <label for="changePassWindowPasswordIn" class="mb-1">Haslo</label>
+            <input type="password" class="form-control bg-light" id="changePassWindowPasswordIn" 
+                   onkeyup="checkIfPasswordIsEqual2('displayChangePassError')" required>
+            <div id="displayChangePassError"> </div>
+        </div>
+
+        <div class="form-group mb-4 col-12 ">
+            <label for="changePassWindowPasswordIn2" class="mb-1">Powtórz haslo</label>
+            <input type="password" class="form-control bg-light" id="changePassWindowPasswordIn2"
+                   onkeyup="checkIfPasswordIsEqual2('displayconfirmChangePassError')" required>
+            <div id="displayconfirmChangePassError"> </div>
+        </div>
+
+        <div class="form-group  col-12  ">
+            <input id="saveNewPasswordBtn" type="submit" class="btn btn-secondary"
+                   value=" Zapisz " onclick="saveNewPassWordBtnAction()" />
+        </div>
+    </form>
+</div>
+
+

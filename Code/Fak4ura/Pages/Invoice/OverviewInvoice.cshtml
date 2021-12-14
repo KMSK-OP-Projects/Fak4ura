@@ -1,0 +1,117 @@
+﻿@page
+@model Fak4ura.Pages.Invoice.OverviewModel
+@{
+    var className = "";
+}
+
+<!-- For Ajax-->
+@Html.AntiForgeryToken()
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+<div class="underNavBar">
+    <div class="row  justify-content-between " style="padding:10px 25px">
+        <div class="">
+            <a asp-area="" asp-page="/Invoice/GenerateInvoice">
+                <input type="button" class="btn btn-light" value="Dodaj fakturę">
+            </a>
+        </div>
+        <div class="  form-inline">
+            <input id="searchInvoiceInput" class="form-control mr-sm-2 " type="search"
+                   oninput="searchInvoice()" placeholder="Search">
+            <!-- <button class="btn btn-outline-light" type="submit">Search</button> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="mainContainer">
+    <table id="serviceProduktTable" class="customTableOne" style="display: inline-block; height: 600px; overflow: auto; ">
+        <tr style="position: sticky; top: 0;">
+            <th style="padding: 3px 25px ">Lp.</th>
+            <th style="padding: 3px 5px">Numer faktury</th>
+            <th style="padding: 3px 60px ">Klient</th>
+            <th style="padding: 3px 3px ">Termin płatności</th>
+            <th style="padding: 3px 30px ">Kwota</th>
+            <th style="padding: 3px 80px ">Usługa/towar</th>
+            <th style="padding: 3px 80px ">Status</th>
+
+        </tr>
+
+        @foreach (var row in @Model.li)
+        {
+            className = "invoiceOverview" + @row.lp;
+            if (row.Status == "Niezaplacone")
+            {
+                var today = DateTime.Now;
+                var sutracted = row.TerminPlatnosci.Subtract(today);
+                if (sutracted.TotalMinutes < 0) // LATE PAYMENT
+                {
+                    row.Background = "#9769bf";
+                }
+
+                else
+                {
+                    row.Background = "#87b1ff";
+                }
+            }
+            else
+            {
+                row.Background = "#1ab394";
+            }
+
+
+
+            <tr class="@className" style=" cursor: pointer" ondblclick="getClassOfClickedRow(this) ,editInvoice(@row.lp) ">
+                <td>@row.lp.</td>
+
+                <td>@row.NumerFaktury</td>
+
+                <td>@row.Klient</td>
+
+                <td>@row.TerminPlatnosci.ToString("dd-MM-yyyy")</td>
+
+                <td>@row.Kwota zł</td>
+
+                <td>
+                    <textarea class="form-control bg-lights serviceProduktInput  " rows="1" readonly
+                              style=" overflow:hidden; background-color:transparent" oninput="auto_grow(this)">@row.UslugaTowar</textarea>
+                </td>
+
+                <td style="text-align: center; vertical-align: middle ; ">
+                    <div class=" " style=" background-color: @row.Background; border-radius: 8px; width:max-content ; display:inline-flex;
+                    text-align: center; color:white;  vertical-align: middle; font-size:13px; padding:2px 5px ; margin:3px">
+                        @row.Status
+
+                    </div>
+
+                    <div id="invoiceEditDiv" style="  display: inline-flex; float: right; margin-right: 5px; ">
+                        <a id="invoiceEditLink" style=" font-size:14px; border-radius:7px; border: solid #aaa 1px;
+                    padding: 2px 6px;" class="btn  btn-outline-secondary" asp-page="/Invoice/EditInvoice"
+                           asp-route-selectedRowNumber="@row.lp" onclick="editInvoice(@row.lp)">Edytuj</a>
+                    </div>
+
+                    <div id="invoiceViewDiv" style="  display: inline-flex; float: right; margin-right: 5px; ">
+                        <a id="invoiceViewLink" style=" font-size:14px; border-radius:7px; border: solid #aaa 1px;
+                    padding: 2px 6px; font-weight:900" class="btn  btn-outline-secondary infoCloudLeft" title="Podgląd"
+                           asp-page="/Invoice/PreviewInvoice" asp-route-selectedRowNumber="@row.lp" onclick="editInvoice(@row.lp)">🗎</a>
+                    </div>
+                </td>
+
+
+            </tr>
+        }
+
+
+
+
+    </table>
+</div>

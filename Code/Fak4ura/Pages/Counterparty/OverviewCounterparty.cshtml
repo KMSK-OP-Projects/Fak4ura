@@ -1,0 +1,86 @@
+﻿@page
+@model Fak4ura.Pages.Counterparty.OverviewModel
+@{
+    var className = "";
+}
+
+<!-- to correspond with js -->
+<input id="passAddCounterPartyResult" type="hidden" name="someValue" runat="server"
+       value="@Model.passAddCounterPartyResult">
+
+<input id="passEditCounterPartyResult" type="hidden" name="someValue" runat="server"
+       value="@Model.passEditCounterPartyResult">
+
+
+<div class="underNavBar">
+    <div class="row  justify-content-between " style="padding:10px 25px">
+        <div class="">
+            <a asp-area="" asp-page="/CounterParty/AddCounterParty">
+                <input type="button" class="btn btn-light" value="Dodaj kontrahenta">
+            </a>
+        </div>
+        <div class="  form-inline">
+            <input id="searchCounterPartyInput" class="form-control mr-sm-2 " type="search"
+                   placeholder="Search" oninput="searchCounterParty()">
+            <!--  <button class="btn btn-outline-light" type="submit">Search</button> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="mainContainer">
+    <table id="counterPartyTable" class="customTableOne" style="display: inline-block; height: 600px; overflow: auto; ">
+        <tr style="position: sticky; top: 0;">
+            <th style="padding: 3px 25px ">Lp.</th>
+            <th style="padding: 3px 85px">Nazwa</th>
+            <th style="padding: 3px 51px ">Imie</th>
+            <th style="padding: 3px 55px ">Nazwisko</th>
+            <th style="padding: 3px 50px ">NIP</th>
+            <th style="padding: 3px 95px ">Email</th>
+            <th style="padding: 3px 50px "> </th>
+        </tr>
+
+        @for (int i = 0; i < Model.li.Count; i++)
+        {
+
+            <tr class="@className" style=" cursor: pointer" ondblclick="getClassOfClickedRow(this) ,editInvoice(@(i+1) ">
+                <td>@(i+1)</td>
+
+                <td>@Model.li[i].NazwaFirmy</td>
+
+                <td>@Model.li[i].Imie</td>
+
+                <td>@Model.li[i].Nazwisko</td>
+
+                <td>@Model.li[i].Nip</td>
+
+                <td>@Model.li[i].Email</td>
+
+
+                <td style="text-align: center; vertical-align: middle ; ">
+
+                    <div id="invoiceEditDiv" style="  display: inline-flex; float: right; margin-right: 5px; ">
+                        <a id="invoiceEditLink" style=" font-size:14px; border-radius:7px; border: solid #aaa 1px;
+                    padding: 2px 6px;" class="btn  btn-outline-secondary" asp-page="/Counterparty/EditCounterparty"
+                           asp-route-selectedCounterPartyId="@(Model.li[i].Id)">Edytuj</a>
+                    </div>
+
+                    <div id="invoiceViewDiv" style="  display: inline-flex; float: right; margin-right: 5px; ">
+                        <a id="invoiceViewLink" style=" font-size:14px; border-radius:7px; border: solid #aaa 1px;
+                    padding: 2px 6px; font-weight:900" class="btn btn-outline-secondary infoCloudLeft"
+                           title="Podgląd"
+                           asp-page="/Counterparty/PreviewCounterparty" asp-route-selectedCounterPartyId="@(Model.li[i].Id)">🗎</a>
+                    </div>
+                </td>
+
+
+            </tr>
+        }
+
+
+
+
+    </table>
+</div>

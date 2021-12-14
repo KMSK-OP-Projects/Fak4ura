@@ -1,0 +1,127 @@
+﻿@page
+@model Fak4ura.Pages.Counterparty.EditModel
+@{
+}
+
+
+<form method="post">
+    <div class="underNavBar">
+        <div class="row justify-content-end " style="padding:10px 25px">
+
+            <div class="ml-4">
+                <input type="submit" class="btn btn-light" asp-page-handler="EditCounterPartyData" 
+                       value="Zapisz">
+            </div>
+            <div class="ml-4">
+                <input type="submit" class="btn btn-light" asp-page-handler="DeleteCounterPartyData"
+                       value="Usuń" formnovalidate>
+            </div>
+        </div>
+    </div>
+
+    <div class="mainContainer">
+        <div>
+            <div class="form-row justify-content-center " style="margin-top: 50px;">
+
+                <!--FIRST COLUMN-->
+                <div class=" col-md-4" style="  margin-top:-8px;">
+                    <div id="handShakeGraphCounterPartyPage">
+                        <img id="" src="~/img/handShake.png" alt="userGraph6.png">
+                    </div>
+                </div>
+
+
+                <!--EMPTY SPACE-->
+                <div class="form-group col-md-1"></div>
+
+
+                <!--SECOND COLUMN-->
+                <div class=" col-md-4">
+                    <input type="hidden" asp-for="CounterPartyInfo.Id">
+
+                    <div class="form-group mb-2 ">
+                        <label for="eCounterPartyImie" class="mb-1" style="font-weight:500">Imię</label>
+                        <input type="text" asp-for="CounterPartyInfo.Imie"
+                               class="form-control bg-light" id="eCounterPartyImie" required>
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="eCounterPartyNazwisko" class="mb-1" style="font-weight:500">Nazwisko</label>
+                        <input type="text" asp-for="CounterPartyInfo.Nazwisko"
+                               class="form-control bg-light" id="eCounterPartyNazwisko" required>
+                    </div>
+
+
+                    <div class="form-group mb-2 ">
+                        <label for="eCounterPartyEmail" class="mb-1" style="font-weight:500">E-mail</label>
+                        <input type="email" asp-for="CounterPartyInfo.Email"
+                               class="form-control bg-light" id="eCounterPartyEmail" required>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr style="width:82%" />
+
+
+            <div class="form-row justify-content-center" style=" margin: 20px 0 ">
+                <!--FIRST COLUMN-->
+                <div class=" col-md-4">
+
+                    <div class="form-group mb-2 ">
+
+                        <label for="eCounterPartyNazwa" class="mb-1" style="font-weight:500">Nazwa/Firma</label>
+                        <input type="text"  asp-for="CounterPartyInfo.NazwaFirmy"
+                               class="form-control bg-light" id="eCounterPartyNazwa/Firma" required>
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="eCounterPartyAdres" class="mb-1" style="font-weight:500">Adres</label>
+                        <input type="text"  asp-for="CounterPartyInfo.Ulica"
+                               class="form-control bg-light" id="eCounterPartyAdres" required>
+                    </div>
+
+                    <div class="form-group mb-0  ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="eCounterPartyMiejscowosc" class="mb-1" style="font-weight:500">Miejscowość</label>
+                                <input type="text" class="form-control bg-light" id="eCounterPartyMiejscowosc" required
+                                       asp-for="CounterPartyInfo.Miejscowosc">
+                            </div>
+                            <div class="form-group col-md-6 ">
+                                <label for="eCounterPartyKodPocztowy" class="mb-1" style="font-weight:500">Kod pocztowy</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">xx-xxx</span>
+                                    <input type="text"  asp-for="CounterPartyInfo.KodPocztowy"
+                                        class="form-control bg-light" id="eCounterPartyKodPocztowy" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="eCounterPartyNIP" class="mb-1" style="font-weight:500">NIP</label>
+                        <input type="text"  asp-for="CounterPartyInfo.Nip" 
+                               class="form-control bg-light" id="eCounterPartyNIP" required>
+                    </div>
+
+                </div>
+
+
+                <!--EMPTY SPACE-->
+                <div class="form-group col-md-1"></div>
+
+
+                <!--SECOND COLUMN-->
+                <div class=" col-md-4">
+
+                    <div class="form-group  mb-2">
+                        <label for="eCounterPartyTelefon" class="mb-1" style="font-weight:500">Telefon</label>
+                        <input type="tel" class="form-control bg-light" id="eCounterPartyTelefon" 
+                               asp-for="CounterPartyInfo.Telefon"required>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

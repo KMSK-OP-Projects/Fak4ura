@@ -1,0 +1,145 @@
+﻿@page
+@model Fak4ura.Pages.Account.VieUserDataModel
+@{
+}
+
+<!-- to correspond with js -->
+<input id="passEditUserDataResult" type="hidden" name="someValue" runat="server"
+       value="@Model.passEditUserDataResult">
+
+
+<div id="AccountUserDataModelDiV">
+
+
+
+
+
+    <div class="underNavBar">
+        <div class="row justify-content-end " style="padding:10px 25px">
+            <a asp-area="" asp-page="/Account/EditUserData">
+                <div class="ml-4">
+                    <input type="button" class="btn btn-light" value="Edytuj">
+                </div>
+            </a>
+            <div class="ml-4">
+                <a asp-page="/Account/Logout">
+                    <input type="button" class="btn btn-light" value="Usuń konto">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="mainContainer">
+
+
+
+        <div class="form-row justify-content-center " style="margin-top: 50px;">
+
+            <!--FIRST COLUMN-->
+            <div class=" col-md-4" style=" ">
+                <div id="userGraphUserDataPage">
+                    <img id="" src="~/img/userGraph6InColorCircle.png" alt="userGraph6.png">
+                </div>
+            </div>
+
+
+
+            <!--SECOND COLUMN-->
+            <div class=" col-md-7" style="margin-right: -40px; margin-left: 15px;">
+
+                <div class="form-group mb-0 form-inline" style="margin-top:-10px">
+                    <label for="userDataImie" class="mb-1 labelInline">Imię</label>
+                    <input type="text" class="inputInline form-control customFormInput2 " id="userDataImie"
+                           value="@Model.UserInfo.Imie" style="width: 60%; background-color: transparent " readonly>
+                </div>
+
+
+                <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                    <label for="userDataNazwisko" class="mb-1 labelInline">Nazwisko</label>
+                    <input type="text" class="form-control customFormInput2 inputInline" id="userDataNazwisko"
+                           value="@Model.UserInfo.Nazwisko" style=" width: 60%; background-color: transparent" readonly>
+                </div>
+
+
+                <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                    <label for="userDataEmail" class="mb-1 labelInline">E-mail</label>
+                    <input type="email" class="form-control customFormInput2 inputInline" id="userDataEmail"
+                           value="@Model.UserInfo.Email" style=" width: 60%; background-color: transparent" readonly>
+                </div>
+
+
+                <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                    <label for="Nazwa/Firma" class="mb-1 labelInline">Nazwa/Firma</label>
+                    <input type="text" class="form-control customFormInput2 inputInline" id="Nazwa/Firma"
+                           value="@Model.UserInfo.NazwaFirmy" style=" width: 60%; background-color: transparent" readonly>
+                </div>
+
+
+                <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                    <label for="userDataAdres" class="mb-1 labelInline">Adres</label>
+                    <input type="text" class="form-control customFormInput2 inputInline" id="userDataAdres"
+                           value="@Model.UserInfo.Ulica" style=" width: 60%;background-color:transparent" readonly>
+                </div>
+
+
+
+                <div class="form-group mb-0  form-inline" style="margin-top:-10px">
+                    <label for="userDataMiejscowosc" class="mb-1 labelInline">Miejscowość</label>
+                    <input type="text" class="form-control customFormInput2 inputInline" id="userDataMiejscowosc"
+                           value="@Model.UserInfo.Miejscowosc" style="width: 60%; background-color: transparent " readonly>
+                </div>
+
+
+                <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                    <label for="userDataKodPocztowy" class="mb-1 labelInline">Kod pocztowy</label>
+                    <input type="text" class="form-control customFormInput2 inputInline" id="userDataKodPocztowy"
+                           value="@Model.UserInfo.KodPocztowy" style=" width: 60%; background-color: transparent" readonly>
+                </div>
+
+
+
+                <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                    <label for="NIP" class="mb-1 labelInline">NIP</label>
+                    <input type="text" class="form-control customFormInput2 inputInline" id="NIP"
+                           value="@Model.UserInfo.Nip" style=" width: 60%; background-color: transparent" readonly>
+                </div>
+                 
+                <div class="form-group  mb-0  form-inline " style="margin-top:-10px">
+                    <label for="Telefon" class="mb-1 labelInline">Telefon</label>
+                    <input type="tel" class="form-control customFormInput2 inputInline" id="userDataTelefon"
+                           value="@Model.UserInfo.Telefon" style=" width: 60%; background-color: transparent" readonly>
+                </div>
+
+
+                <div class="form-group mb-0 form-inline " style="margin-top:-10px">
+                    <label for="nazwaBnaku" class="mb-1 labelInline">Bank</label>
+                    <input type="text" id="userDataNazwaBnaku" class="form-control customFormInput2 inputInline"
+                           value="@Model.UserInfo.Bank" style=" width: 60%; background-color: transparent" readonly />
+                </div>
+
+
+                <div class="form-group mb-0  form-inline " style="margin-top:-10px">
+                    <label for="userDataNrKonta" class="mb-1 labelInline">Numer konta</label>
+                    <input type="text" id="userDataNrKonta" class="form-control customFormInput2 inputInline"
+                           value="@Model.UserInfo.NumerKonta" style=" width: 60%; background-color: transparent" readonly />
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+

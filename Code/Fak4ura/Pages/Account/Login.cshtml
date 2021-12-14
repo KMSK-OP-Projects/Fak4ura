@@ -5,6 +5,8 @@
 <!-- to correspond with js -->
 <input id="passRecoveryResult" type="hidden" name="someValue" runat="server" value="@Model.passRecoveryResult">
 <input id="passLoginResult" type="hidden" name="someValue" runat="server" value="@Model.passLoginResult">
+<input id="passRegistrationResult" type="hidden" name="someValue" runat="server" value="@Model.passRegistrationResult">
+
 
 
 <div class="container-fluid ">
@@ -12,7 +14,7 @@
     <!-- Login-->
     <div class="  main-content bg-success text-center " id="login-form">
         <div class="col-md-6 text-center logoArea  ">
-           	<img src="~/img/logoCloud2.png" alt="logo" width="230"> 
+            <img src="~/img/logoCloud2.png" alt="logo" width="230">
         </div>
         <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
             <div class="container-fluid">
@@ -24,11 +26,11 @@
                 <div>
                     <form control="" class="form-group" asp-page-handler="Login">
                         <div>
-                            <input type="text" asp-for="User.userName" name="username" id="username" class="customFormInput " placeholder="Nazwa użytkownika" required>
+                            <input type="text" asp-for="LoginInput" id="username" class="customFormInput " placeholder="E-mail" required>
                         </div>
                         <div>
                             <!-- <span class="fa fa-lock"></span> -->
-                            <input type="password" asp-for="User.password" name="password" id="password" class="customFormInput" placeholder="Haslo" required>
+                            <input type="password" asp-for="PasswordInput" id="password" class="customFormInput" placeholder="Haslo" required>
                         </div>
 
                         <div>
@@ -62,29 +64,33 @@
                     <h2 class="formTitleEmot"> 🗎</h2>
                 </div>
                 <div>
-                    <form control="" class="form-group">
+                    <form control="" class="form-group" asp-page-handler="Register">
                         <div>
-                            <input type="text" name="Imie" id="name" class="customFormInput form-control-sm" placeholder="Imię" required>
+                            <input type="text"  id="name" asp-for="NameInput"
+                                   class="customFormInput " placeholder="Imię" required>
                         </div>
 
                         <div>
-                            <input type="text" name="Nazwisko" id="lastName" class="customFormInput form-control-sm" placeholder="Nazwisko" required>
+                            <input type="text"  id="lastName" asp-for="LastnameInput"
+                                   class="customFormInput " placeholder="Nazwisko" required>
                         </div>
 
                         <div>
-                            <input type="password" name="pass" id="pass" class="customFormInput form-control-sm" placeholder="Hasło" required
-                                   onchange="checkIfPasswordIsEqual('displayPassError')" onkeyup="checkIfPasswordIsEqual('displayPassError')">
+                            <input type="password"  id="pass" asp-for="PasswordInput" class="customFormInput "
+                                   placeholder="Hasło" required onchange="checkIfPasswordIsEqual('displayPassError')"
+                                   onkeyup="checkIfPasswordIsEqual('displayPassError')">
                             <div id="displayPassError"> </div>
                         </div>
 
                         <div>
-                            <input type="password" name="confirmPass" id="confirmPass" class="customFormInput form-control-sm" placeholder="Potwierdź haslo" required
+                            <input type="password"  id="confirmPass" class="customFormInput" placeholder="Potwierdź haslo" required
                                    onchange="checkIfPasswordIsEqual('displayconfirmPassError')" onkeyup="checkIfPasswordIsEqual('displayconfirmPassError')">
                             <div id="displayconfirmPassError"> </div>
                         </div>
 
                         <div>
-                            <input type="email" name="email" id="email" class="customFormInput form-control-sm" placeholder="E-mail" required>
+                            <input type="email"   id="email" asp-for="EmailInput"
+                                   class="customFormInput" placeholder="E-mail" required>
                         </div>
 
                         <div>

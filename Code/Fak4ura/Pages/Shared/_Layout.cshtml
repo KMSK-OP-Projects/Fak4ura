@@ -6,33 +6,39 @@
     <title>@ViewData["Title"] - Fak4ura</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+   
 </head>
 <body>
 
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm flex navbar-light bg-white border-bottom box-shadow mb-3">
-            
-            <div class="col-md-2">
+
+            <div class="col-md-3">
                 <a id="titleLogo" asp-area="" asp-page="/Index">
                     <img id="logo" src="~/img/logo.png" alt="logo" style="height:40px">
                 </a>
             </div>
 
-            <div class="form-group col-md-2"></div>
 
 
-            <div class="col-md-5" >
+
+            <div class="col-md-6 text-center ">
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="NavbarLinks ">
-                        <a style="margin: 25px; text-decoration: none; color: black; 
-                            font-size: 20px; font-weight: 600" asp-area="" asp-page="/Index">
-                            Przeglądaj faktury
+                        <a style="margin: 20px; text-decoration: none; color: black; font-size: 15px;
+                            font-weight: 500" asp-page="/Invoice/OverviewInvoice">
+                            ｜Przeglądaj faktury
                         </a>
 
-                        <a style="color: black; text-decoration: none; font-size: 20px; 
-                            font-weight: 600" asp-area="" asp-page="/Index">
-                            Kontrahenci
+                        <a style="margin: 20px; color: black; text-decoration: none; font-size: 15px;
+                            font-weight: 500 " asp-page="/Counterparty/OverviewCounterparty">
+                            ｜Kontrahenci
+                        </a>
+
+                        <a style="margin: 20px; color: black; text-decoration: none; font-size: 15px;
+                            font-weight: 500" asp-page="/Account/ViewUserData">
+                            ｜Dane użytkownika
                         </a>
                     </div>
                 }
@@ -58,7 +64,7 @@
                                 <img src="~/img/userGraph6InColor.png" alt="logo" style="margin-right:16px; height:23px">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-page="/Account/UserData">Dane użytownika</a>
+                                <a class="dropdown-item" asp-page="/Account/ViewUserData">Dane użytownika</a>
                                 <a class="dropdown-item" asp-page="/Account/Logout">Wyloguj</a>
 
                             </div>
@@ -88,7 +94,7 @@
                 </div>
             </div>
 
-          
+
 
         </nav>
     </header>

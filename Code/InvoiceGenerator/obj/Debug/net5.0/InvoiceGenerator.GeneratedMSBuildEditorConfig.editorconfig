@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = InvoiceGenerator
-build_property.ProjectDir = C:\Users\kr1p0\Desktop\Fak4\Fak4ura\Code\InvoiceGenerator\
+build_property.ProjectDir = C:\Users\kr1p0\GitHub\Fak4ura\Code\InvoiceGenerator\

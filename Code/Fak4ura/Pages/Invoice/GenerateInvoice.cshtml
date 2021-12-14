@@ -1,0 +1,562 @@
+﻿@page
+@model Fak4ura.Pages.Invoice.GenerateModel
+@{
+}
+
+<!-- For Ajax-->
+@Html.AntiForgeryToken()
+
+
+@{
+    var dt = DateTime.Now.ToString("yyyy-MM-dd");
+    var fakturaNr = "FV-" + DateTime.Now.ToString("yyMMddHHmmss");
+}
+
+<!--For pdf print-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+
+<body  style="background-color:#fff" onload="AjaxGetConterPartyNames()">
+
+    <div class="html-content">
+        <table class="hide4Pdf" id="genInvoicefixedLeftBtn">
+            <tr>
+                <td style="border:0">
+                    <label class="handPointer" for="printWinBtnG" style="margin-top: 12px; color: white">
+                        Print
+                    </label>
+                </td>
+                <td style="border:0">
+                    <button id="printWinBtnG" class="btn-lg  " style=" font-weight:500; font-size:27px;border:0;
+                    padding:0 4px; background-color:transparent;color:white" onclick="printWindow()">
+                        ⎙
+                    </button>
+                </td>
+            </tr>
+
+            <tr style="border-top:solid #ccc 1px">
+                <td style="border:0">
+                    <label class="handPointer" for="saveWinBtnG" style="color: white;margin-top:12px;">
+                        Save
+                    </label>
+                </td>
+                <td style="border:0">
+                    <button id="saveWinBtnG" class="btn-lg" style="font-weight:500; font-size:26px;
+                    margin-top:6px; padding:0 12px; border:0; color:white;
+                    background-color:transparent" onclick="CreatePDFfromHTML()">
+                        ⭳
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+
+
+
+        <!--LOGO-->
+        <div class="form-row " style="margin:30px 0 0 25px;">
+            <div id="invoiceLogoContainer" class=" col-md-7 hide4Pdf">
+
+                <div id="invoiceLogoDiv" style="align-items: center; justify-content: center; display:flex ;">
+                    <div id="invoiceLogoInputLabel">
+                        <label for="logo-upload" style="font-size: 80px; border: none; background-color: transparent; "
+                               class="custom-file-upload">⇪</label>
+                        <label for="logo-upload" style="font-size:26px;">Dodaj Logo </label>
+                        <input id="logo-upload" type="file" style="" onchange="onInvoiceLogoImageSelected(event)" />
+                    </div>
+                    <img id="invoiceLogoImage" style="left:18px" src="">
+                </div>
+                <!--&nbsp-->
+            </div>
+
+
+            <!--EMPTY SPACE-->
+            <div class="form-group col-md-2"></div>
+
+
+
+            <!--THIRD COLUMN (UPPER)-->
+            <div class=" col-md-2" style="  margin-left:-20px">
+                <div style="">
+                    <div class="form-group mb-2 ">
+                        <h1 class="mb-4">Faktura</h1>
+                        <label for="Nazwa/Firma" class="mb-1">Numer faktury</label>
+                        <input type="text" value="@fakturaNr" class="form-control" id="generatgedInvoiceId">
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="dataWystawienia</" class="mb-1">Data wystawienia</label>
+                        <input type="date" value="@dt" class="form-control " id="dataWystawienia">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form style="margin-top:25px">
+            <div class="form-row" style="margin:0 0px;">
+                <!--FIRST COLUMN-->
+                <div class=" col-md-4">
+                    <div class="form-group mb-2 ">
+                        <h2 class="mb-4">Sprzedawca</h2>
+                        <label for="Nazwa/Firma" class="mb-1">Nazwa/Firma</label>
+                        <input type="text" asp-for="UserInfo.NazwaFirmy"
+                               class="form-control bg-light" id="gInvoiceSNazwa/Firma">
+                    </div>
+
+
+                    <div class="form-group mb-2 ">
+                        <label for="Adres" class="mb-1">Adres</label>
+                        <input type="text" asp-for="UserInfo.Ulica"
+                               class="form-control bg-light" id="gInvoiceSAdres">
+                    </div>
+
+                    <div class="form-group mb-0  ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="Miejscowosc" class="mb-1">Miejscowość</label>
+                                <input type="text" asp-for="UserInfo.Miejscowosc"
+                                       class="form-control bg-light" id="gInvoiceSMiejscowosc">
+                            </div>
+                            <div class="form-group col-md-6 ">
+                                <label for="KodPocztowy" class="mb-1">Kod pocztowy</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">xx-xxx</span>
+                                    <input type="text" asp-for="UserInfo.KodPocztowy"
+                                           class="form-control bg-light" id="gInvoiceSKodPocztowy">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="NIP" class="mb-1">NIP</label>
+                        <input type="text" asp-for="UserInfo.Nip"
+                               class="form-control bg-light" id="gInvoiceSNIP">
+                    </div>
+
+                    <div class="form-group  mb-2">
+                        <label for="Telefon" class="mb-1">Telefon</label>
+                        <input type="tel" asp-for="UserInfo.Telefon"
+                               class="form-control bg-light" id="gInvoiceSTelefon">
+                    </div>
+
+                    <div class="form-group  mb-2">
+                        <label for="email" class="mb-1">E-mail</label>
+                        <input type="email" asp-for="UserInfo.Email"
+                               class="form-control bg-light" id="gInvoiceSemail">
+                    </div>
+
+                </div>
+
+
+                <!--EMPTY SPACE-->
+                <div class="form-group col-md-1"></div>
+
+
+                <!--SECOND COLUMN-->
+                <div class=" col-md-4 ">
+                    <h2 class="mb-4">Nabywca</h2>
+                    <div id="selectKontrahent" class="form-group mb-2 ">
+                        <label for="selectKontrahentInput" class="mb-1">Kontrahent</label>
+                        <select id="selectKontrahentInput" class="form-control bg-light"
+                                oninput="fillCounterPartyInsertData(this)">
+
+                            <option value="" disabled selected>Wybierz...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="Nazwa/Firma" class="mb-1">Nazwa/Firma</label>
+                        <input type="text" class="form-control bg-light" id="gInvoiceNNazwa/Firma">
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="Adres" class="mb-1">Adres</label>
+                        <input type="text" class="form-control bg-light" id="gInvoiceNAdres">
+                    </div>
+
+                    <div class="form-group  mb-0 ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="Miejscowosc" class="mb-1">Miejscowość</label>
+                                <input type="text" class="form-control bg-light" id="gInvoiceNMiejscowosc">
+                            </div>
+                            <div class="form-group col-md-6 ">
+                                <label for="KodPocztowy" class="mb-1">Kod pocztowy</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">xx-xxx</span>
+                                    <input type="text" class="form-control bg-light" id="gInvoiceNKodPocztowy">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="NIP" class="mb-1">NIP</label>
+                        <input type="text" class="form-control bg-light" id="gInvoiceNNIP">
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="Telefon" class="mb-1">Telefon</label>
+                        <input type="tel" class="form-control bg-light" id="gInvoiceNTelefon">
+                    </div>
+
+                    <div class="form-group mb-2 ">
+                        <label for="email" class="mb-1">E-mail</label>
+                        <input type="email" class="form-control bg-light" id="gInvoiceNEmail">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <br />
+            <br />
+
+
+
+            <!--PRODUCT TABLE-->
+            <table id="serviceProduktTable">
+                <tr>
+                    <th style="width:90px;">Lp.</th>
+                    <th style="width:310px;">Usługa/towar</th>
+                    <th style="width:120px;">Ilość</th>
+                    <th style="width:90px;">Jednostka</th>
+                    <th style="width:140px;">Kwota netto</th>
+                    <th style="width:95px;">VAT</th>
+                    <th style="width:140px;">Kwota brutto</th>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <input name="lpColumn" class="form-control bg-lights serviceProduktInput productTableRow1"
+                               type="text" readonly value="1." />
+                    </td>
+
+                    <td>
+                        <textarea name="productCol" class="form-control bg-lights serviceProduktInput " rows="1"
+                                  style=" overflow:hidden" oninput="auto_grow(this)"></textarea>
+                    </td>
+
+                    <td>
+                        <input name="quantityCol" class="form-control bg-lights serviceProduktInput productTableRow1"
+                               type="text" value=1 oninput="updatePriceValues(this), getAmountToPay()" />
+                    </td>
+
+                    <td id="jedostkaColumn">
+                        <select id="inputState" class="form-control bg-lights serviceProduktInput ">
+                            <option selected>szt</option>
+                            <option>godz</option>
+                            <option>g</option>
+                            <option>kg</option>
+                            <option>m</option>
+                            <option>mb</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <input name="nettoAmountCol" class="form-control bg-lights serviceProduktInput productTableRow1"
+                               type="text" oninput="updatePriceValues(this), getAmountToPay()" />
+                    </td>
+
+                    <td id="vatColumn">
+
+                        <select name="vatAmountCol" class="form-control bg-lights serviceProduktInput productTableRow1 "
+                                oninput="updateVatColumn(), updatePriceValues(this), getAmountToPay()">
+                            <option selected>23%</option>
+                            <option>22%</option>
+                            <option>21%</option>
+                            <option>20%</option>
+                            <option>19%</option>
+                            <option>18%</option>
+                            <option>0</option>
+                        </select>
+
+
+                    </td>
+
+                    <td>
+                        <input name="bruttoAmountCol" class="form-control bg-lights serviceProduktInput productTableRow1" type="text"
+                               oninput="updatePriceValues(this), getAmountToPay()" />
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+
+            <!--SUMMARY PRODUCT TABLE-->
+            <table id="serviceProduktTable">
+                <tr>
+                    <td style="width:90px; border:0"></td>
+                    <td style="width: 310px; border: 0"></td>
+                    <td style="width: 120px; border: 0"></td>
+                    <td style="width: 90px; border: 0"></td>
+                    <td style="width: 141px; font-size: 20px; text-align: center; border: 0 ">Do zapłaty</td>
+                    <td style="width:95px">
+                        <input id="totalVatAmount" class="form-control bg-lights serviceProduktInput" type="text" readonly />
+                    </td>
+                    <td style="width:140px">
+                        <input id="totalBruttoAmount" class="form-control bg-lights serviceProduktInput" type="text" readonly />
+                    </td>
+                </tr>
+            </table>
+
+
+            <!--ADD ROW BUTTON-->
+            <input type="button" id="addRowButton" value="+" style="border-radius: 20px; color:white;position:absolute ;
+            background-color: rgb(120 120 120); border: 0; font-size: 18px; width: 30px; margin: -55px 0 0 -12px;
+            padding: 0px 3px 3px 3px" class="hide4Pdf" />
+
+            <!--<input type="button" value="xxx" onclick="getTableRowValues()" />-->
+            <!--TRANSACTION DETAILS-->
+            <div style="margin-top:80px;">
+                <div class="form-row mb-3">
+                    <div class="col-md-2 ">
+                        <label for="sposobPlatnosci" style="font-size:20px;">Sposób płatności</label>
+                    </div>
+                    <div class="col-md-2 ">
+                        <select id="inputState" class="form-control bg-light">
+                            <option selected>Przelew</option>
+                            <option>Gotówka</option>
+                            <option>Natura</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row mb-3 ">
+                    <div class="col-md-2 ">
+                        <label for="sposobPlatnosci" style="font-size:20px;">Termin płatności</label>
+                    </div>
+                    <div class="col-md-2 ">
+                        <input type="date" id="sposobPlatnosci" class="form-control bg-light" />
+                    </div>
+                </div>
+
+                <div class="form-row mb-3 ">
+                    <div class="col-md-2 ">
+                        <label for="sposobPlatnosci" style="font-size:20px;">Nazwa Banku</label>
+                    </div>
+                    <div class="col-md-2 ">
+                        <input type="text" id="sposobPlatnosci" class="form-control bg-light" />
+                    </div>
+                </div>
+
+                <div class="form-row mb-3 ">
+                    <div class="col-md-2 ">
+                        <label for="sposobPlatnosci" style="font-size:20px;">Numer konta</label>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" id="sposobPlatnosci" class="form-control bg-light" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</body>
+
+
+
+
+<!--
+<div class="  align-items-center ">
+    <div class="row   ">
+        <div class="col-md-10 order-md-1">
+            <h4 class="mb-4">Dane firmy</h4>
+            <form class="needs-validation" novalidate />
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                    <div class="invalid-feedback">
+                        Valid first name is required.
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                    <div class="invalid-feedback">
+                        Valid last name is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="username">Username</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">&commat;</span>
+                    </div>
+                    <input type="text" class="form-control" id="username" placeholder="Username" required>
+                    <div class="invalid-feedback" style="width: 100%;">
+                        Your username is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Nazwa firmy  </label>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label for="address2">NIP <span class="text-muted">(Optional)</span></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">xxx-xxx-xx-xx</span>
+                    </div>
+                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="address">Address</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Miejscowosc &amp; Nr</span>
+                    </div>
+                    <input type="text" class="form-control" id="address" required>
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="country">Kraj</label>
+                    <select class="custom-select d-block w-100" id="country" required>
+                        <option value="">Choose...</option>
+                        <option>United States</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid country.
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="state">Miejscowość</label>
+                    <select class="custom-select d-block w-100" id="state" required>
+                        <option value="">Choose...</option>
+                        <option>California</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="zip">Kod pocztowy</label>
+                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Zip code required.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<hr style="width: 100%; border-width: 2px; text-align: left; margin-left: 0 ">
+
+
+<div class="row   ">
+    <div class="col-md-10 order-md-1">
+        <form class="needs-validation" novalidate />
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="firstName">Nazwa banku</label>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="" >
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="username">Konto bankowe</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" id="username" >
+                <div class="invalid-feedback" style="width: 100%;">
+                    Your username is required.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+    <div class="main-content ">
+    <form class="">
+
+        <div class="input-group mb-4 col-md-12">
+            <div class="input-group-prepend">
+                <div class="input-group-text">Imię | Nazwisko</div>
+            </div>
+            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" required>
+        </div>
+
+        <div class="input-group mb-4  col-md-10">
+            <div class="input-group-prepend">
+                <div class="input-group-text">Nazwa firmy</div>
+            </div>
+            <input type="text" class="form-control">
+        </div>
+
+        <div class="input-group mb-4 col-md-5">
+            <div class="input-group-prepend">
+                <div class="input-group-text">NIP</div>
+            </div>
+            <input type="text" class="form-control">
+        </div>
+
+        <div class="input-group mb-4 col-md-12">
+            <div class="input-group-prepend">
+                <div class="input-group-text">Adres</div>
+            </div>
+            <input type="text" class="form-control">
+        </div>
+
+
+        <div class="form-row col-md-12">
+            <div class="input-group mb-4 col-md-7 ">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Miejscowość</div>
+                </div>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="input-group mb-4 col-md-5 ">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Kod pocztowy</div>
+                </div>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary ">Save</button>
+    </form>
+</div>
+
+    -->

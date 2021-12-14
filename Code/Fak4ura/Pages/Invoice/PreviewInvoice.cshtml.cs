@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Fak4ura.Pages.Account
+namespace Fak4ura.Pages.Invoice
 {
     [Authorize]
-    public class UserDataModel : PageModel
+    public class PreviewModel : PageModel
     {
+        [BindProperty(SupportsGet = true)]
+        public string selectedRowNumber { get; set; }
         public void OnGet()
         {
         }

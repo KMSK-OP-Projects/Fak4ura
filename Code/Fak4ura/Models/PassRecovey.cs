@@ -4,21 +4,68 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Fak4ura.Models
 {
-    public class PassRecovery
+    public class PassRecovery : DbConnection
     {
-        // [important] https://accounts.google.com/b/0/DisplayUnlockCaptcha
-
-        public string sendIt(string recipientAdress, string content)
+        public PassRecovery() { }
+        public PassRecovery(string email)
         {
+            Email = email;
+            getUserPassword(email);
+        }
+        public string Email { get;set;}
+        public string Password { get; set; }
+    
+
+        private void getUserPassword(string email)
+        {
+            Console.WriteLine("--->@PassRecovery()");
+            string sqlsqlQuery = $"select haslo from F4_Uzytkownicy Where email = '{email}'";
+            OracleConnection oracleConn = new OracleConnection(ConnString);
+            Console.WriteLine("Open connection...");
+            oracleConn.Open();
+            Console.WriteLine("Connected status: " + oracleConn.State);
+            OracleCommand cmd = new OracleCommand(sqlsqlQuery, oracleConn);
+            OracleDataReader dataReader = cmd.ExecuteReader();
+            if (!dataReader.HasRows)
+            {
+                Console.WriteLine("No data found");
+                return;
+            }
+            try
+            {
+                while (dataReader.Read())
+                {
+                    Password = (dataReader["haslo"].ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                oracleConn.Close();
+                Console.WriteLine("Connection status: " + oracleConn.State);
+            }
+        }
+
+
+
+
+        public string sendIt(string content)
+        {
+            // [important] https://accounts.google.com/b/0/DisplayUnlockCaptcha
+
             var sender = "fak4ura@gmail.com";
             const string senderPassword = "Toffifee";
             //var file = new Attachment(@"C:myreport.txt");
             MailMessage mailMsg = new MailMessage();
             MailAddress mailAdress = new MailAddress(sender);
-            mailMsg.To.Add(recipientAdress);
+            mailMsg.To.Add(Email);
             mailMsg.From = mailAdress;
             //mailMsg.Attachments.Add(file);
             mailMsg.Body = content;
@@ -36,16 +83,16 @@ namespace Fak4ura.Models
             try
             {
                 smtp.Send(mailMsg);
-                return "Successfully sent  ✓";
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return "⛌ " + ex.Message;
             }
             finally
             {
                 //file.Dispose();
             }
+            return "✓ Pomyślnie wysłano";
         }
     }
 }
