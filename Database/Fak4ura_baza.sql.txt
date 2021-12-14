@@ -23,7 +23,7 @@ CREATE TABLE F4_Uzytkownicy (
     kraj      VARCHAR(50),
     nr_dokumentu VARCHAR(20),
     typ_dokumentu VARCHAR(7) CONSTRAINT f4_u_td_chk CHECK (typ_dokumentu IN ('DOWOD', 'PASZPORT')),
-    email     VARCHAR(60) NOT NULL,
+    email     VARCHAR(60) NOT NULL UNIQUE,
     telefon  VARCHAR(20),
     nip     VARCHAR(30),
     bank  VARCHAR(30),
