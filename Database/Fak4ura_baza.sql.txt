@@ -17,6 +17,7 @@ CREATE TABLE F4_Uzytkownicy (
     nazwa_firmy VARCHAR2(50),
     nazwisko_rodowe VARCHAR(50),
     haslo     VARCHAR2(100)NOT NULL,
+    sol VARCHAR2(40) NOT NULL,
     ulica     VARCHAR(50),
     kod_pocztowy VARCHAR(8),
     miejscowosc  VARCHAR(50),
@@ -91,7 +92,7 @@ ALTER TABLE F4_Faktury_pozycje ADD (
 CREATE TABLE F4_tempHash (
     id int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     uzytkownik_id int NOT NULL,
-    sol VARCHAR2(20) NOT NULL,
+    sol VARCHAR2(40) NOT NULL,
     hash_string VARCHAR2(70) NOT NULL,
     data_utworzenia TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
