@@ -80,13 +80,15 @@ ALTER TABLE F4_Faktury_pozycje ADD (
     CONSTRAINT f4_fp_fk_f FOREIGN KEY (faktura_id) REFERENCES F4_Faktury( id )
 );
 
-
 CREATE TABLE F4_tempHash (
     id int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-    email_id int NOT NULL,
+    email_id VARCHAR2(30) NOT NULL,
     sol VARCHAR2(20) NOT NULL,
     hash_string VARCHAR2(70) NOT NULL,
     data_utworzenia TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+alter table F4_tempHash
+add constraint F4_tempHash_fk foreign key (email_id) references F4_uzytkownicy(email);
 
 
