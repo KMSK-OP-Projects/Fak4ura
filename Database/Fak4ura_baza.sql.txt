@@ -7,10 +7,11 @@ DROP TABLE F4_Faktury_pozycje CASCADE CONSTRAINTS;
 DROP TABLE F4_Faktury CASCADE CONSTRAINTS;
 DROP TABLE F4_Uzytkownicy CASCADE CONSTRAINTS;
 DROP TABLE F4_Kontrahenci CASCADE CONSTRAINTS;
+DROP TABLE F4_temphash CASCADE CONSTRAINTS;
 
 
 CREATE TABLE F4_Uzytkownicy (
-    --id        NUMBER GENERATED ALWAYS AS IDENTITY,
+    uzytkownik_id    int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     imie      VARCHAR2(30) NOT NULL,
     nazwisko  VARCHAR2(50) NOT NULL,
     nazwa_firmy VARCHAR2(50),
@@ -29,46 +30,53 @@ CREATE TABLE F4_Uzytkownicy (
     numer_konta     VARCHAR(50),
     aktywny   NUMBER(1,0) CONSTRAINT f4_u_a_chk CHECK (aktywny IN (0, 1))
 );
-ALTER TABLE F4_Uzytkownicy ADD CONSTRAINT f4_u_pk PRIMARY KEY ( email );
+ALTER TABLE F4_Uzytkownicy ADD CONSTRAINT f4_u_pk PRIMARY KEY ( uzytkownik_id );
+
 
 
 CREATE TABLE F4_Kontrahenci (
-    id        NUMBER GENERATED ALWAYS AS IDENTITY,
+    id        int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    uzytkownik_id int NOT NULL,
     nazwa     VARCHAR2(50) UNIQUE NOT NULL,
     imie      VARCHAR2(30) NOT NULL,
     nazwisko  VARCHAR2(50) NOT NULL,
     ulica     VARCHAR(50),
+    miejscowosc  VARCHAR(50),
     kod_pocztowy VARCHAR(8),
-    kraj      VARCHAR(50) NOT NULL,
+    kraj      VARCHAR(50) ,
     NIP       VARCHAR(10),
+    telefon   VARCHAR(16),
     email     VARCHAR(60),
     www       VARCHAR2(50)
 );
+
 ALTER TABLE F4_Kontrahenci ADD (
     CONSTRAINT f4_k_pk PRIMARY KEY ( id )
 );
 
+alter table F4_Kontrahenci
+add constraint F4_Kontrahenci_fk foreign key (uzytkownik_id) references F4_Uzytkownicy(uzytkownik_id);
 
 CREATE TABLE F4_Faktury (
-    id        NUMBER GENERATED ALWAYS AS IDENTITY,
+    id     int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     numer     VARCHAR(20) UNIQUE NOT NULL,
     data      DATE DEFAULT SYSDATE,
     waluta    VARCHAR(3),
-    ilosc_pozycji NUMBER NOT NULL,
+    ilosc_pozycji NUMBER ,
     wartosc   NUMBER NOT NULL,
     podatek   NUMBER,
-    uzytkownik_login VARCHAR2(20) NOT NULL,
+    uzytkownik_id int NOT NULL,
     kontrahent_id NUMBER NOT NULL
 );
 ALTER TABLE F4_Faktury ADD (
     CONSTRAINT f4_f_pk PRIMARY KEY ( id ),
-    CONSTRAINT f4_f_fk_u FOREIGN KEY (uzytkownik_login) REFERENCES F4_Uzytkownicy( email ),
+    CONSTRAINT f4_f_fk_u FOREIGN KEY (uzytkownik_id) REFERENCES F4_Uzytkownicy( uzytkownik_id ),
     CONSTRAINT f4_f_fk_k FOREIGN KEY (kontrahent_id) REFERENCES F4_Kontrahenci( id )
 );
 
 
 CREATE TABLE F4_Faktury_pozycje (
-    id        NUMBER GENERATED ALWAYS AS IDENTITY,
+    id      int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     nazwa_pozycji VARCHAR2(50) NOT NULL,
     ilosc     NUMBER NOT NULL,
     cena      NUMBER,
@@ -82,13 +90,13 @@ ALTER TABLE F4_Faktury_pozycje ADD (
 
 CREATE TABLE F4_tempHash (
     id int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
-    email_id VARCHAR2(30) NOT NULL,
+    uzytkownik_id int NOT NULL,
     sol VARCHAR2(20) NOT NULL,
     hash_string VARCHAR2(70) NOT NULL,
     data_utworzenia TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 alter table F4_tempHash
-add constraint F4_tempHash_fk foreign key (email_id) references F4_uzytkownicy(email);
+add constraint F4_tempHash_fk foreign key (uzytkownik_id) references F4_uzytkownicy(uzytkownik_id);
 
 
