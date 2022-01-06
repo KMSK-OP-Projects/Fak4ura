@@ -33,13 +33,13 @@
 
                     <div class="form-group mb-2 ">
                         <label for="aCounterPartyImie" class="mb-1" style="font-weight:500">Imię</label>
-                        <input type="text" asp-for="CounterPartyInfo.Imie"
+                        <input type="text" asp-for="CounterPartyInfo.Imie" pattern=".*[A-Z].{1,}" title="Imię musis zacznyać ię dużą literą."
                                class="form-control bg-light" id="aCounterPartyImie" required>
                     </div>
 
                     <div class="form-group mb-2 ">
                         <label for="aCounterPartyNazwisko" class="mb-1" style="font-weight:500">Nazwisko</label>
-                        <input type="text" asp-for="CounterPartyInfo.Nazwisko"
+                        <input type="text" asp-for="CounterPartyInfo.Nazwisko"  pattern=".*[A-Z].{1,}" title="Nazwisko musis zacznyać ię dużą literą."
                                class="form-control bg-light" id="aCounterPartyNazwisko" required>
                     </div>
 
@@ -90,12 +90,12 @@
                     <div class="form-group  mb-2">
                         <label for="aCounterPartyTelefon" class="mb-1" style="font-weight:500">Telefon</label>
                         <input type="tel" class="form-control bg-light" id="aCounterPartyTelefon" required
-                               asp-for="CounterPartyInfo.Telefon">
+                               asp-for="CounterPartyInfo.Telefon" pattern="^\d{9}$" title="Numer telefonu musi posiadać 9 cyfr" >
                     </div>
 
                     <div class="form-group mb-2 ">
                         <label for="aCounterPartyAdres" class="mb-1" style="font-weight:500">Adres</label>
-                        <input type="text" asp-for="CounterPartyInfo.Ulica"
+                        <input type="text" asp-for="CounterPartyInfo.Ulica" pattern=".*[A-Z].{1,}" title="Adres musi zacznyać się dużą literą. Np. Warszawska 3"
                                class="form-control bg-light" id="aCounterPartyAdres" required>
                     </div>
 
@@ -104,13 +104,13 @@
                             <div class="col-md-6">
                                 <label for="aCounterPartyMiejscowosc" class="mb-1" style="font-weight:500">Miejscowość</label>
                                 <input type="text" class="form-control bg-light" id="aCounterPartyMiejscowosc" required
-                                       asp-for="CounterPartyInfo.Miejscowosc">
+                                       asp-for="CounterPartyInfo.Miejscowosc" pattern=".*[A-Z].{1,}" title="Miejscowość musi zacznyać się dużą literą" >
                             </div>
                             <div class="form-group col-md-6 ">
                                 <label for="aCounterPartyKodPocztowy" class="mb-1" style="font-weight:500">Kod pocztowy</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">xx-xxx</span>
-                                    <input type="text" asp-for="CounterPartyInfo.KodPocztowy"
+                                    <input type="text" asp-for="CounterPartyInfo.KodPocztowy" pattern="^\d{2}-\d{3}$" title="Kod musi być oddzielony xx-xxx"
                                            class="form-control bg-light" id="aCounterPartyKodPocztowy" required>
                                 </div>
                             </div>

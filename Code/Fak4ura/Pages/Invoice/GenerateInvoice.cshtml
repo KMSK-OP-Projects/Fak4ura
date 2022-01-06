@@ -100,14 +100,14 @@
                     <div class="form-group mb-2 ">
                         <h2 class="mb-4">Sprzedawca</h2>
                         <label for="Nazwa/Firma" class="mb-1">Nazwa/Firma</label>
-                        <input type="text" asp-for="UserInfo.NazwaFirmy"
+                        <input type="text" asp-for="UserInfo.NazwaFirmy" pattern=".*[A-Z].{1,}" title="Nazwa firmy musis zacznyać ię dużą literą."
                                class="form-control bg-light" id="gInvoiceSNazwa/Firma">
                     </div>
 
 
                     <div class="form-group mb-2 ">
                         <label for="Adres" class="mb-1">Adres</label>
-                        <input type="text" asp-for="UserInfo.Ulica"
+                        <input type="text" asp-for="UserInfo.Ulica" pattern=".*[A-Z].{1,}" title="Adres musi zacznyać się dużą literą. Np. Warszawska 3" asp-for="UserInfo.Ulica"
                                class="form-control bg-light" id="gInvoiceSAdres">
                     </div>
 
@@ -115,14 +115,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="Miejscowosc" class="mb-1">Miejscowość</label>
-                                <input type="text" asp-for="UserInfo.Miejscowosc"
+                                <input type="text" asp-for="UserInfo.Miejscowosc" pattern=".*[A-Z].{1,}" title="Miejscowość musi zacznyać się dużą literą"
                                        class="form-control bg-light" id="gInvoiceSMiejscowosc">
                             </div>
                             <div class="form-group col-md-6 ">
                                 <label for="KodPocztowy" class="mb-1">Kod pocztowy</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">xx-xxx</span>
-                                    <input type="text" asp-for="UserInfo.KodPocztowy"
+                                    <input type="text" asp-for="UserInfo.KodPocztowy" pattern="^\d{2}-\d{3}$" title="Kod musi być oddzielony xx-xxx"
                                            class="form-control bg-light" id="gInvoiceSKodPocztowy">
                                 </div>
                             </div>
@@ -131,13 +131,13 @@
 
                     <div class="form-group mb-2 ">
                         <label for="NIP" class="mb-1">NIP</label>
-                        <input type="text" asp-for="UserInfo.Nip"
+                        <input type="text" asp-for="UserInfo.Nip" pattern="^\d{10}$" title="Numer NIP musi posiadać 10 cyfr"
                                class="form-control bg-light" id="gInvoiceSNIP">
                     </div>
 
                     <div class="form-group  mb-2">
                         <label for="Telefon" class="mb-1">Telefon</label>
-                        <input type="tel" asp-for="UserInfo.Telefon"
+                        <input type="tel" asp-for="UserInfo.Telefon" pattern="^\d{9}$" title="Numer telefonu musi posiadać 9 cyfr"
                                class="form-control bg-light" id="gInvoiceSTelefon">
                     </div>
 

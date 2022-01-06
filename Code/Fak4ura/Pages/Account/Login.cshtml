@@ -30,7 +30,7 @@
                         </div>
                         <div>
                             <!-- <span class="fa fa-lock"></span> -->
-                            <input type="password" asp-for="PasswordInput" id="password" class="customFormInput" placeholder="Haslo" required>
+                            <input type="password" asp-for="PasswordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Hasło musi zawierać jedną cyfrę, jedną małą i dużą literę oraz conajmniej 8 znaków" id="password" class="customFormInput" placeholder="Haslo" required>
                         </div>
 
                         <div>
@@ -66,31 +66,31 @@
                 <div>
                     <form control="" class="form-group" asp-page-handler="Register">
                         <div>
-                            <input type="text"  id="name" asp-for="NameInput"
+                            <input type="text"  id="name" pattern=".*[A-Z].{1,}" title="Imię musi zacznyać się dużą literą" asp-for="NameInput"
                                    class="customFormInput " placeholder="Imię" required>
                         </div>
 
                         <div>
-                            <input type="text"  id="lastName" asp-for="LastnameInput"
+                            <input type="text"  id="lastName" pattern=".*[A-Z].{1,}" title="Nazwisko musi zacznyać się dużą literą" asp-for="LastnameInput"
                                    class="customFormInput " placeholder="Nazwisko" required>
                         </div>
 
                         <div>
-                            <input type="password"  id="pass" asp-for="PasswordInput" class="customFormInput "
+                            <input type="password"  id="pass" asp-for="PasswordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Hasło musi zawierać jedną cyfrę, jedną małą i dużą literę oraz conajmniej 8 znaków" class="customFormInput "
                                    placeholder="Hasło" required onchange="checkIfPasswordIsEqual('displayPassError')"
                                    onkeyup="checkIfPasswordIsEqual('displayPassError')">
                             <div id="displayPassError"> </div>
                         </div>
 
                         <div>
-                            <input type="password"  id="confirmPass" class="customFormInput" placeholder="Potwierdź haslo" required
+                            <input type="password"  id="confirmPass" class="customFormInput"  placeholder="Potwierdź haslo" required
                                    onchange="checkIfPasswordIsEqual('displayconfirmPassError')" onkeyup="checkIfPasswordIsEqual('displayconfirmPassError')">
                             <div id="displayconfirmPassError"> </div>
                         </div>
 
                         <div>
-                            <input type="email"   id="email" asp-for="EmailInput"
-                                   class="customFormInput" placeholder="E-mail" required>
+                            <input type="email"   id="email" asp-for="EmailInput" 
+                                   class="customFormInput" placeholder="E-mail" required >
                         </div>
 
                         <div>
