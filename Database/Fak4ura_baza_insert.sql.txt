@@ -9,3 +9,12 @@ INSERT INTO F4_Uzytkownicy VALUES ('admin',' ','','','4dmin1!','','','','Polska'
 -- INSERT INTO F4_Uzytkownicy VALUES ('Jan','Zysk','ZyskUberAlles','Zysk','czystyzysk1','Zyskowna 12','00-200','Kryspinow','Polska','AAA100001','DOWOD','jan.zysk@gmail.com','070072772','123-123-45-45','BankPocztowy','32 1240 6960 7387 0000 0129 7687',1);
 
 
+-- Faktura
+INSERT INTO F4_Faktury(uzytkownik_id, numer, termin_platnosci, waluta, uregulowana, wartosc , 
+podatek, sprzedawca_nazwa, sprzedawca_adres, sprzedawca_miejscowosc, sprzedawca_kod_pocztowy ,
+sprzedawca_nip, sprzedawca_telefon,sprzedawca_email, nabywca_nazwa, nabywca_adres, 
+nabywca_miejscowosc ,nabywca_kod_pocztowy, nabywca_nip, nabywca_telefon, nabywca_email ) 
+VALUES (1 , 'fv123' ,  TO_DATE('2021-12-14' , 'YYYY-MM-DD') ,'pln', 't' , '1199' , 
+'39' , 'ali' ,'podziemna 49' , 'Kryspinow' , '22-121' ,'1231231212' , '123123123' ,'www@ww.pl',
+'biera' , 'porzadana 30' , 'Krakow' , '12-121' ,'1231230000' , '345345345' , 'nabywam@o2.pl'); 
+
