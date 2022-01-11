@@ -60,19 +60,33 @@ add constraint F4_Kontrahenci_fk foreign key (uzytkownik_id) references F4_Uzytk
 
 CREATE TABLE F4_Faktury (
     id     int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    uzytkownik_id NUMBER NOT NULL,
     numer     VARCHAR(20) UNIQUE NOT NULL,
-    data      DATE DEFAULT SYSDATE,
+    data_wystawienia      DATE DEFAULT SYSDATE,
+    termin_platnosci      DATE ,
     waluta    VARCHAR(3),
-    ilosc_pozycji NUMBER ,
+    uregulowana VARCHAR(1) NOT NULL,
     wartosc   NUMBER NOT NULL,
     podatek   NUMBER,
-    uzytkownik_id int NOT NULL,
-    kontrahent_id NUMBER NOT NULL
+    sprzedawca_nazwa VARCHAR2(30) NOT NULL,
+    sprzedawca_adres VARCHAR2(25) NOT NULL,
+    sprzedawca_miejscowosc VARCHAR2(25) NOT NULL,
+    sprzedawca_kod_pocztowy VARCHAR2(8) NOT NULL,
+    sprzedawca_nip VARCHAR2(15) NOT NULL,
+    sprzedawca_telefon VARCHAR2(20),
+    sprzedawca_email VARCHAR2(30),
+    nabywca_nazwa VARCHAR2(30) NOT NULL,
+    nabywca_adres VARCHAR2(25) NOT NULL,
+    nabywca_miejscowosc VARCHAR2(25) NOT NULL,
+    nabywca_kod_pocztowy VARCHAR2(8) NOT NULL,
+    nabywca_nip VARCHAR2(15) NOT NULL,
+    nabywca_telefon VARCHAR2(20),
+    nabywca_email VARCHAR2(30)
 );
 ALTER TABLE F4_Faktury ADD (
     CONSTRAINT f4_f_pk PRIMARY KEY ( id ),
-    CONSTRAINT f4_f_fk_u FOREIGN KEY (uzytkownik_id) REFERENCES F4_Uzytkownicy( uzytkownik_id ),
-    CONSTRAINT f4_f_fk_k FOREIGN KEY (kontrahent_id) REFERENCES F4_Kontrahenci( id )
+    CONSTRAINT f4_f_fk_u FOREIGN KEY (uzytkownik_id) REFERENCES F4_Uzytkownicy( uzytkownik_id )
+   -- CONSTRAINT f4_f_fk_k FOREIGN KEY (kontrahent_id) REFERENCES F4_Kontrahenci( id )
 );
 
 
