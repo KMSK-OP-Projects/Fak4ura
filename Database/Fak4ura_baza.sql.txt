@@ -29,7 +29,8 @@ CREATE TABLE F4_Uzytkownicy (
     nip     VARCHAR(30),
     bank  VARCHAR(30),
     numer_konta     VARCHAR(50),
-    aktywny   NUMBER(1,0) CONSTRAINT f4_u_a_chk CHECK (aktywny IN (0, 1))
+    aktywny   NUMBER(1,0) CONSTRAINT f4_u_a_chk CHECK (aktywny IN (0, 1)),
+    logo blob
 );
 ALTER TABLE F4_Uzytkownicy ADD CONSTRAINT f4_u_pk PRIMARY KEY ( uzytkownik_id );
 
@@ -70,6 +71,7 @@ CREATE TABLE F4_Faktury (
     podatek   VARCHAR(13),
     bank   VARCHAR(25),
     konto   VARCHAR(25),
+    forma_platnosci   VARCHAR(15),
     sprzedawca_nazwa VARCHAR2(30) NOT NULL,
     sprzedawca_adres VARCHAR2(25) NOT NULL,
     sprzedawca_miejscowosc VARCHAR2(25) NOT NULL,
@@ -83,7 +85,8 @@ CREATE TABLE F4_Faktury (
     nabywca_kod_pocztowy VARCHAR2(8) NOT NULL,
     nabywca_nip VARCHAR2(15) NOT NULL,
     nabywca_telefon VARCHAR2(20),
-    nabywca_email VARCHAR2(30)
+    nabywca_email VARCHAR2(30),
+    logo blob
 );
 ALTER TABLE F4_Faktury ADD (
     CONSTRAINT f4_f_pk PRIMARY KEY ( id ),
@@ -95,8 +98,9 @@ ALTER TABLE F4_Faktury ADD (
 CREATE TABLE F4_Faktury_pozycje (
     id      int  GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     nazwa_pozycji VARCHAR2(50) NOT NULL,
-    ilosc     NUMBER NOT NULL,
-    cena      NUMBER,
+    ilosc     VARCHAR2(15) NOT NULL,
+    cena      VARCHAR2(20),
+    jednostka	VARCHAR2(12),
     podatek   VARCHAR2(20),
     faktura_id NUMBER NOT NULL
 );
