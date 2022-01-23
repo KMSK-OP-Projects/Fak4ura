@@ -96,28 +96,6 @@ namespace Fak4ura.Pages.Account
             ModelState.Clear();
         }
 
-        public void OnPostRemindMail2()
-        {
-            PassRecovery userInfo = new PassRecovery(emailAdress4Recovery);
-
-            if (!string.IsNullOrEmpty(userInfo.Password))
-            {
-                var rndString = randomStr.Generate();
-                var salt = BCrypt.Net.BCrypt.GenerateSalt();
-                var verifyingHash = BCrypt.Net.BCrypt.HashPassword(userInfo.Email + rndString, salt);
-                var obj = new VerifyingHash();
-                obj.InsertHash(userInfo.UzytkownikId, verifyingHash, salt);
-                var link = $"https://localhost:5001/Account/ForgotPass?verifyingHash={verifyingHash}";
-                passRecoveryResult = userInfo.sendIt("Klik: " + link);
-            }
-
-            else
-                passRecoveryResult = "⛌ Podano błędny E-mail";
-
-            emailAdress4Recovery = null;
-            ModelState.Clear();
-        }
-
         public void OnPostRegister()
         {    
             UserData bandyta = new UserData(EmailInput);
@@ -128,6 +106,20 @@ namespace Fak4ura.Pages.Account
             }
             var salt = BCrypt.Net.BCrypt.GenerateSalt();
             var hashedPasswordInput = BCrypt.Net.BCrypt.HashPassword(passwordInput , salt);
+            Registration reg = new Registration(NameInput, LastnameInput, EmailInput, hashedPasswordInput, salt);
+            passRegistrationResult = reg.result;
+        }
+
+        public void savePassRec()
+        {
+            UserData bandyta = new UserData(EmailInput);
+            if (!string.IsNullOrEmpty(bandyta.Email))
+            {
+                passRegistrationResult = "⛌ Email powiązany z innym kontem";
+                return;
+            }
+            var salt = BCrypt.Net.BCrypt.GenerateSalt();
+            var hashedPasswordInput = BCrypt.Net.BCrypt.HashPassword(passwordInput, salt);
             Registration reg = new Registration(NameInput, LastnameInput, EmailInput, hashedPasswordInput, salt);
             passRegistrationResult = reg.result;
         }
