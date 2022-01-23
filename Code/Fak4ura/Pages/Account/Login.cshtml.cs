@@ -96,6 +96,28 @@ namespace Fak4ura.Pages.Account
             ModelState.Clear();
         }
 
+        public void OnPostRemindMail2()
+        {
+            PassRecovery userInfo = new PassRecovery(emailAdress4Recovery);
+
+            if (!string.IsNullOrEmpty(userInfo.Password))
+            {
+                var rndString = randomStr.Generate();
+                var salt = BCrypt.Net.BCrypt.GenerateSalt();
+                var verifyingHash = BCrypt.Net.BCrypt.HashPassword(userInfo.Email + rndString, salt);
+                var obj = new VerifyingHash();
+                obj.InsertHash(userInfo.UzytkownikId, verifyingHash, salt);
+                var link = $"https://localhost:5001/Account/ForgotPass?verifyingHash={verifyingHash}";
+                passRecoveryResult = userInfo.sendIt("Klik: " + link);
+            }
+
+            else
+                passRecoveryResult = "⛌ Podano błędny E-mail";
+
+            emailAdress4Recovery = null;
+            ModelState.Clear();
+        }
+
         public void OnPostRegister()
         {    
             UserData bandyta = new UserData(EmailInput);
